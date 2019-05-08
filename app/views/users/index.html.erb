@@ -1,0 +1,7 @@
+<%= render 'posts/list', results: @results, search: @search %>
+
+<div class="">
+	<%= attachment_image_tag @user, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %>
+	<%= @user.nickname %>
+	<%= @user.introduction %>
+</div>

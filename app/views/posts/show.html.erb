@@ -1,0 +1,54 @@
+<div class="container">
+
+<div>
+    <%= @post.title %>
+    <%= @post.text %>
+    <%= @post.distance %>
+</div>
+
+<h2>gmap</h2>
+<!-- form_withはデフォルトでremote: trueの挙動になります -->
+    <%= form_with url: map_request_path, method: :get do |f|%>
+        <%= f.text_field :address %>
+        <%= f.submit '地図表示' %>
+    <% end %>
+
+<div id="map">
+</div>
+
+<style>
+    #map{
+      height: 400px;
+    }
+</style>
+
+<div>
+<% @post.comments.each do |comment| %>
+    <span><%= comment.user.nickname %></span>
+    <span><%= comment.comment %></span>
+    <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+<% end %>
+</div>
+<div>
+<%= form_for [@post, @comment] do |f| %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        </div>
+    </div>
+        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
+</div>
+</div>
+
+<script>
+  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+
+  function initMap(){
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api&/js?key=YOUR_API_KEY&callback=initMap" async defer></script>

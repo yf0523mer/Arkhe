@@ -1,0 +1,12 @@
+<h2>新規投稿</h2>
+<div class="">
+	<%= form_for @post, url: posts_path do |f| %>
+		<b>タイトル</b>
+			<%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"タイトル"%>
+		<b>本文</b>
+			<%= f.text_field :text, autofocus: true, id:"inputLastnamekana", placeholder:"本文"%>
+		<b>距離</b>
+			<%= f.text_field :distance, autofocus: true, id:"inputFirstname", placeholder:"距離"%>
+		<%= f.submit '新規投稿',class: 'btn btn-default col-lg-2' %>
+	<% end %>
+</div>
