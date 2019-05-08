@@ -1,0 +1,16 @@
+<% provide(:title, 'All posts') %>
+	<h1>投稿一覧</h1>
+
+	<%= search_form_for @search  do |f| %>
+	  <div class="form-group">
+	    <%= f.label :title_cont, "title" %>
+	    <%= f.text_field :title_cont, class: "form-control" %>
+	  </div>
+	  <div class="actions"><%= f.submit "Search" %></div>
+	<% end %>
+
+	<% if @results.any? %>
+ 		<% @results.each do |result| %>
+   		<p><%= result.title %></p>
+ 	<% end %>
+<% end %>

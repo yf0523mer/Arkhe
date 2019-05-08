@@ -1,0 +1,60 @@
+<div class="">
+	<%= form_for @user, url: user_path do |f| %>
+		<b>苗字</b>
+			<%= f.text_field :last_name, autofocus: true, id:"inputLastname", placeholder:"苗字"%>
+		<b>苗字かな</b>
+			<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastnamekana", placeholder:"苗字かな"%>
+		<b>名前</b>
+			<%= f.text_field :first_name, autofocus: true, id:"inputFirstname", placeholder:"名前"%>
+		<b>名前かな</b>
+			<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstname", placeholder:"名前かな"%>
+		<b>ニックネーム</b>
+			<%= f.text_field :nickname, autofocus: true, id:"inputNickname", placeholder:"ニックネーム"%>
+		<b>E-mail</b>
+			<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"E-mail"%>
+		<b>ユーザ画像</b>
+	        <%= f.attachment_field :image, class: "image", type:'file' %>
+		<br>
+		<div class="preview"></div>
+		<div class="user-edit">
+			<b>Introduction</b>
+				<%= f.text_area :introduction, autofocus: true, class:"introduction", id:"inputIntroduction", placeholder:"自己紹介"%>
+			<%= f.submit 'ユーザ編集',class: 'btn btn-default col-lg-2' %>
+	<% end %>
+		</div>
+</div>
+
+<script>
+	$(function(){
+  //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+  $('form').on('change', 'input[type="file"]', function(e) {
+    var file = e.target.files[0],
+        reader = new FileReader(),
+        $preview = $(".preview");
+        t = this;
+
+    // 画像ファイル以外の場合は何もしない
+    if(file.type.indexOf("image") < 0){
+      return false;
+    }
+
+    // ファイル読み込みが完了した際のイベント登録
+    reader.onload = (function(file) {
+      return function(e) {
+        //既存のプレビューを削除
+        $preview.empty();
+        // .prevewの領域の中にロードした画像を表示するimageタグを追加
+        $preview.append($('<img>').attr({
+                  src: e.target.result,
+                  width: "200px",
+                  class: "preview",
+                  title: file.name
+              }));
+      };
+    })(file);
+
+    reader.readAsDataURL(file);
+  });
+});
+
+</script>
