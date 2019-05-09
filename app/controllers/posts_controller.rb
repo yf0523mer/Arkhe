@@ -8,7 +8,8 @@ class PostsController < ApplicationController
 
   def new
 		@post = Post.new
-		@image = Image.new
+		@post.images.build
+    @post.places.build
 	end
 
   def show
@@ -42,9 +43,19 @@ class PostsController < ApplicationController
   		redirect_to user_path(current_user.id) #今はとりあえず
 	end
 
+  def map
+    results = Geocoder.search(params[:address])
+    @latlng = results.first.coordinates
+    # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+    respond_to do |format|
+      format.js
+    end
+  end
+
 	private
     def post_params
-        params.require(:post).permit(:title, :user_id, :text, :distance, :deleated)
+        params.require(:post).permit(:title, :user_id, :text, :distance, :deleated,
+          images_images: [], places_attributes: [:address, :order])
     end
     def delete_post_params
         params.require(:post).permit(:deleated)

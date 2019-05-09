@@ -33,6 +33,10 @@
 
 	<h3>投稿一覧</h3>
 		<% @users.posts.each do |post| %>
-			<%= post.title %>
+      <span class="post-index"><%= link_to post_path(post.id) do %>
+        <%= attachment_image_tag post.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '60x60', class:"post-image" %>
+        <% end %>
+      </span>
+			<%=link_to post.title, post_path(post.id), class:"post-title" %>
 		<% end %>
 

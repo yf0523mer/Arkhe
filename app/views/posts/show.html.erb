@@ -4,22 +4,25 @@
     <%= @post.title %>
     <%= @post.text %>
     <%= @post.distance %>
+    <% @post.images.each do |image| %>
+      <%= attachment_image_tag image, :image, :fill, 200, 200, class:"", size: '200x200' %>
+    <% end %>
 </div>
 
 <h2>gmap</h2>
 <!-- form_withはデフォルトでremote: trueの挙動になります -->
-    <%= form_with url: map_request_path, method: :get do |f|%>
-        <%= f.text_field :address %>
-        <%= f.submit '地図表示' %>
-    <% end %>
+<%= form_with url: map_request_path, method: :get do |f|%>
+  <%= f.text_field :address %>
+  <%= f.submit '地図表示' %>
+<% end %>
 
 <div id="map">
 </div>
 
 <style>
-    #map{
-      height: 400px;
-    }
+#map{
+  height: 400px;
+}
 </style>
 
 <div>
@@ -41,14 +44,17 @@
 </div>
 </div>
 
+
 <script>
   let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
 
   function initMap(){
     mapInstance = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
+    center: {lat: 35.658, lng: 139.7},
+    zoom: 14
     });
   }
 </script>
-<script src="https://maps.googleapis.com/maps/api&/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+
+

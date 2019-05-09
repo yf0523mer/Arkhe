@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 		@user = current_user
 		@search = Post.ransack(params[:q])
 	    @results = @search.result
+	    @feed_items = current_user.feed.paginate(page: params[:page])
 	end
 
 	def show
@@ -39,6 +40,20 @@ class UsersController < ApplicationController
 	    @users.update(delete_user_params)
 	    redirect_to root_path
     end
+
+    def following
+	    @title = "Following"
+	    @user  = User.find(params[:id])
+	    @users = @user.following.paginate(page: params[:page])
+	    render 'show_follow'
+	end
+
+	def followers
+	    @title = "Followers"
+	    @user  = User.find(params[:id])
+	    @users = @user.followers.paginate(page: params[:page])
+	    render 'show_follow'
+	end
 
 	private
         def user_params

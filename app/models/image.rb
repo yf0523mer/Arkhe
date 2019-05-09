@@ -1,4 +1,4 @@
 class Image < ApplicationRecord
-	belongs_to :post
 	attachment :image
+	belongs_to :post, inverse_of: :images
 end
