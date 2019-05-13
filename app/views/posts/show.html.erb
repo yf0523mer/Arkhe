@@ -25,6 +25,34 @@
 }
 </style>
 
+<div class="favorite-zone">
+  <% if @post.user_id != current_user.id %>
+    <% if @post.favorited_by?(current_user) %>
+      <li>
+        <%= link_to post_favorites_path(@post), method: :delete do %>
+          <i class="favorite-btn" aria-hidden="true">
+            <%= @post.favorites.count%> Like
+          </i>
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to post_favorites_path(@post), method: :post do %>
+          <i class="favorite-btn" aria-hidden="true">
+            <%= @post.favorites.count %> Like
+          </i>
+        <% end %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+      <i class="favorite-number" aria-hidden="true">
+            <%= @post.favorites.count %> Like
+      </i>
+    <% end %>
+  </li>
+</div>
+
 <div>
 <% @post.comments.each do |comment| %>
     <span><%= comment.user.nickname %></span>

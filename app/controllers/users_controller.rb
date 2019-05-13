@@ -8,15 +8,16 @@ class UsersController < ApplicationController
 	def index
 		@user = current_user
 		@search = Post.ransack(params[:q])
-	    @results = @search.result
-	    @feed_items = current_user.feed.paginate(page: params[:page])
+	    @results = @search.result.where(deleted: 'false')
+	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false')
 	end
 
 	def show
 		@user = current_user
 		@users = User.find(params[:id])
 	    @search = Post.ransack(params[:q])
-	    @results = @search.result
+	    @results = @search.result.where(deleted: 'false')
+	    @posts = @users.posts.where(deleted: 'false')
 	end
 
 	def edit
