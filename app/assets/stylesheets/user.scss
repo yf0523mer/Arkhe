@@ -21,3 +21,89 @@
 	margin: auto;
 	padding: 20px;
 }
+
+.user-image {
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.user-image:hover{
+    opacity: 0.6;
+    transition-duration: 0.3s;
+}
+
+.user-index a:hover{
+    text-decoration: none;
+}
+
+.follow-title h3 {
+    font-family: 'Verdana';
+}
+
+#top-page {
+  width: 100%;
+  height: 600px;
+  background-image: url(garden.jpg);
+  background-size: cover;
+}
+
+.text-box p {
+  width: 100%;
+  height: 200px;
+  color: white;/*文字は白に*/
+  font-weight: bold; /*太字に*/
+  font-size: 3em;/*サイズ2倍*/
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display        : inline-block;
+  text-shadow: 0 0 15px black;
+}
+
+.invisible {
+  transition: all 0.5s ease;
+  opacity: 0.0;
+  margin-left: 100px;
+}
+
+.visible {
+  transition: all 0.5s ease;
+  opacity: 1.0;
+  margin-left: 0;
+}
+
+.top-text1 {
+  position: relative;
+  height: 600px;
+  display: block;
+  width: 100%;
+  background-image: url(bench.jpg);
+  background-size: cover;
+}
+
+div .top-title {
+  position: relative;
+  display: block;
+  height: 500px;
+}
+
+.top-text p {
+  text-align: center;
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  display        : inline-block;
+  text-shadow: 0 0 15px black;
+  color: white;/*文字は白に*/
+  font-weight: bold; /*太字に*/
+  font-size: 2em;/*サイズ2倍*/
+}

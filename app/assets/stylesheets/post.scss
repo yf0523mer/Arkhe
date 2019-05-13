@@ -1,3 +1,26 @@
 // Place all the styles related to the post controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post-title {
+	color: black;
+}
+
+.post-title:hover{
+    color: red;
+    text-decoration: none;
+}
+
+.post-image {
+  	cursor: pointer;
+  	transition-duration: 0.3s;
+}
+
+.post-image:hover{
+    opacity: 0.6;
+  	transition-duration: 0.3s;
+}
+
+ .post-index a:hover{
+	text-decoration: none;
+}

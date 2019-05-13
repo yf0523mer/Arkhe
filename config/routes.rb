@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'map/index'
   devise_for :users
   root 'users#top'
-  get '/map_request', to: 'maps#map', as: 'map_request'
+  get '/map_request', to: 'posts#map', as: 'map_request'
   get 'posts/' => 'posts#index'
 
   resources :users

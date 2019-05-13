@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_062532) do
+ActiveRecord::Schema.define(version: 2019_05_09_044720) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id", null: false
@@ -36,8 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_062532) do
 
   create_table "places", force: :cascade do |t|
     t.integer "post_id", null: false
-    t.text "latitude", null: false
-    t.text "longitude", null: false
+    t.string "address", null: false
     t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

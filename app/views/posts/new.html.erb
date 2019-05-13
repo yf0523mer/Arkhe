@@ -1,12 +1,53 @@
 <h2>新規投稿</h2>
 <div class="">
+	<h2>gmap</h2>
+	<!-- form_withはデフォルトでremote: trueの挙動になります -->
+	<%= form_with url: map_request_path, method: :get do |f|%>
+	  <%= f.text_field :address %>
+	  <%= f.submit '地図表示' %>
+	<% end %>
+
+	<div id="map">
+	</div>
+
+
+	<style>
+	#map{
+	  height: 400px;
+	}
+	</style>
 	<%= form_for @post, url: posts_path do |f| %>
+		<h3>行った場所</h3>
+	    <div id='places'>
+		      <%= f.fields_for :places do |place| %>
+		        <%= render 'place_fields', :f => place %>
+		      <% end %>
+		      <div class='links'>
+		        <%= link_to_add_association 'add place', f, :places %>
+		    </div>
+    	</div>
+
 		<b>タイトル</b>
 			<%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"タイトル"%>
 		<b>本文</b>
 			<%= f.text_field :text, autofocus: true, id:"inputLastnamekana", placeholder:"本文"%>
 		<b>距離</b>
 			<%= f.text_field :distance, autofocus: true, id:"inputFirstname", placeholder:"距離"%>
+			<h3>写真投稿</h3>
+				<%= f.attachment_field :images_images, multiple: true %>
 		<%= f.submit '新規投稿',class: 'btn btn-default col-lg-2' %>
 	<% end %>
 </div>
+
+<script>
+  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+
+  function initMap(){
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: 35.658, lng: 139.7},
+	    zoom: 14
+    });
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>

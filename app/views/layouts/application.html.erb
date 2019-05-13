@@ -45,6 +45,7 @@
                           <li class="header-right">
                             <li class="header-right">
                             <%= link_to "マイページ", user_path(current_user.id), class: "header-link fas fa-home" %>
+                            </li>
                           </li>
                           <li class="header-right">
                               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-link fas fa-sign-out-alt" %>
@@ -60,15 +61,12 @@
                   </ul>
           </div>
       </header>
-      <%# if current_user.deleted == false %>
+
         <%= yield %>
-      <%# else  %>
-        <!-- <p>このユーザーは未登録、もしくは退会済みです</p> -->
-      <%# end  %>
+
       <footer class="footer">
           <p class="footer-text">© Yumiko Fukuchi.</p>
       </footer>
     </div>
-
   </body>
 </html>

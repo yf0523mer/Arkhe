@@ -1,7 +1,25 @@
+<div id="container">
+	<div id="theTarget">
+		<div class="Top1"><p>∴さて・・・・ どこへ行こうか？</p></div>
+		<div class="Top2"><p>∴さて・・・・ どこへ行こうか？</p></div>
+		<div class="Top3"><p>∴さて・・・・ どこへ行こうか？</p></div>
+	</div>
+</div>
+
 <%= render 'posts/list', results: @results, search: @search %>
 
 <div class="">
 	<%= attachment_image_tag @user, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %>
 	<%= @user.nickname %>
 	<%= @user.introduction %>
+</div>
+
+<div class="">
+	<% @feed_items.each do |post| %>
+		<span><%= link_to post_path(post.id) do %>
+	              	<%= attachment_image_tag post.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '40x40', class:"post-image" %>
+	              <% end %>
+	        </span>
+	   	<p><%= link_to post.title, post_path(post.id), class:"post-title" %></p>
+	<% end %>
 </div>
