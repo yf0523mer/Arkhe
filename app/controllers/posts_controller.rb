@@ -1,35 +1,47 @@
 class PostsController < ApplicationController
 	def index
-    #(params[:q])に検索パラメーターが入り、Productテーブルを検索する@searchオブジェクトを生成
-    @search = Post.ransack(params[:q])
-    #検索結果を表示する@resultsオブジェクトを生成
-    @results = @search.result
+      #(params[:q])に検索パラメーターが入り、Productテーブルを検索する@searchオブジェクトを生成
+      @search = Post.ransack(params[:q])
+      #検索結果を表示する@resultsオブジェクトを生成
+      @results = @search.result.where(deleted: 'false')
   end
 
   def new
-
-		@post = Post.new
-		@post.images.build
-    @post.places.build
+  		@post = Post.new
+  		@post.images.build
+      @post.places.build
 	end
 
   def show
-    @post = Post.find(params[:id])
-    @comment = Comment.new
-    @search = Post.ransack(params[:q])
-    @results = @search.result
+      @post = Post.find(params[:id])
+      if @post.deleted == true
+        redirect_to users_path
+      else
+        @comment = Comment.new
+        @search = Post.ransack(params[:q])
+        @results = @search.result
+      end
   end
 
 	def create
-    	@post = Post.new(post_params)
-    	@post.user_id = current_user.id
-    if @post.save
+      @post = Post.new(post_params)
+      @post.user_id = current_user.id
+      if @post.save
+          redirect_to post_path(@post.id)
+      else
+          @post = Post.new
+          @image = Image.new
+          render :new
+      end
+  end
+
+  def edit
+      @user = current_user
+      @post = Post.find(params[:id])
+      if current_user.id == @post.user_id || current_user.admin == true
+      else
         redirect_to post_path(@post.id)
-    else
-        @post = Post.new
-        @image = Image.new
-        render :new
-    end
+      end
   end
 
 	def update
@@ -45,12 +57,12 @@ class PostsController < ApplicationController
 	end
 
   def map
-    results = Geocoder.search(params[:address])
-    @latlng = results.first.coordinates
-    # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
-    respond_to do |format|
-      format.js
-    end
+      results = Geocoder.search(params[:address])
+      @latlng = results.first.coordinates
+      # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+      respond_to do |format|
+        format.js
+      end
   end
 
 	private
@@ -59,6 +71,6 @@ class PostsController < ApplicationController
           images_images: [], places_attributes: [:address,:order])
     end
     def delete_post_params
-        params.require(:post).permit(:deleated)
+        params.require(:post).permit(:deleted)
     end
 end

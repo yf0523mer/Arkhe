@@ -7,4 +7,10 @@ class Post < ApplicationRecord
 	has_many :favorites, dependent: :destroy
 	has_many :places
 	accepts_nested_attributes_for :places
+
+	
+
+	def favorited_by?(user)
+          favorites.where(user_id: user.id).exists?
+    end
 end
