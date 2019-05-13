@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-	def active_for_authentication?
-    	super && current_user.deleted == false
-    end
+
 
 	def top
 

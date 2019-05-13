@@ -1,8 +1,14 @@
-<% provide(:title, @title) %>
+<div class='follow-title'>
+  <% provide(:title, @title) %>
+</div>
     <section class="stats">
       <% if @users.any? %>
-        <div class="user_avatars">
+        <div class="user-index">
           <% @users.each do |user| %>
+            <span><%= link_to user_path(user.id) do %>
+                    <%= attachment_image_tag user, :image, :fill, 40, 40, fallback: "No_image.png",size: '40x40', class:"user-image" %>
+                  <% end %>
+            </span>
             <%= link_to user.nickname, user_path(user.id) %>
           <% end %>
         </div>

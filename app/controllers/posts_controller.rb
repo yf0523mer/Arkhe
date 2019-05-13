@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def new
+
 		@post = Post.new
 		@post.images.build
     @post.places.build
@@ -55,7 +56,7 @@ class PostsController < ApplicationController
 	private
     def post_params
         params.require(:post).permit(:title, :user_id, :text, :distance, :deleated,
-          images_images: [], places_attributes: [:address, :order])
+          images_images: [], places_attributes: [:address,:order])
     end
     def delete_post_params
         params.require(:post).permit(:deleated)

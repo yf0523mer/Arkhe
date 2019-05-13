@@ -17,6 +17,15 @@
 	}
 	</style>
 	<%= form_for @post, url: posts_path do |f| %>
+		<h3>行った場所</h3>
+	    <div id='places'>
+		      <%= f.fields_for :places do |place| %>
+		        <%= render 'place_fields', :f => place %>
+		      <% end %>
+		      <div class='links'>
+		        <%= link_to_add_association 'add place', f, :places %>
+		    </div>
+    	</div>
 
 		<b>タイトル</b>
 			<%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"タイトル"%>

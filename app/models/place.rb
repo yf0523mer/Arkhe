@@ -1,3 +1,3 @@
 class Place < ApplicationRecord
-	belongs_to :post, inverse_of: :places
+	belongs_to :post
 end
