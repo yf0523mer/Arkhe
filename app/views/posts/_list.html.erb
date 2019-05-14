@@ -1,11 +1,13 @@
 <% provide(:title, 'All posts') %>
-	<h1>投稿一覧</h1>
-
+	<div class="search-zone" style="float:left">
+	<h1>Posts List</h1>
 	<%= search_form_for search  do |f| %>
 	  <div class="form-group">
-	    <%= f.label :title_cont, "投稿検索" %>
+	    <%= f.label :title_cont, "Search" %>
 	    <%= f.text_field :title_cont, class: "form-control" %>
 	  </div>
-	  <div class="actions"><%= f.submit "Search" %></div>
-
+	  <div class="search-btn-zone">
+	  	<%= f.submit "Let's Search", class:"search-btn" %>
+	  </div>
+	</div>
 <% end %>

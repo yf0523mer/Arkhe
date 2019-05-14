@@ -37,7 +37,7 @@
 }
 
 .follow-title h3 {
-    font-family: 'Verdana';
+  font-family: 'Comic Sans MS',sans-serif;
 }
 
 #top-page {
@@ -106,4 +106,317 @@ div .top-title {
   transition: all 0.5s ease;
   opacity: 1.0;
   margin-left: 0;
+}
+
+.follow-zone {
+  list-style: none;
+  font-style: normal;
+  margin:10px;
+}
+
+.follow-btn {
+  position: relative;
+  display: inline-block;
+  padding: .56em .1em;
+  border: 2px solid #333;
+  color: #333;
+  text-align: center;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  font-family: 'Comic Sans MS',sans-serif;
+  width: 120px;
+  height: 40px;
+}
+
+.follow-btn::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #00fa9a;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.follow-btn:hover {
+  color: #fff;
+  background-color: #38b48b;
+}
+
+.follow-btn:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*ユーザ編集*/
+
+.user-action-zone {
+  list-style: none;
+  font-style: normal;
+  margin:10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.user-edit-btn {
+  position: relative;
+  display: inline-block;
+  padding: .56em .1em;
+  border: 2px solid #333;
+  color: #333;
+  text-align: center;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  font-family: 'Comic Sans MS',sans-serif;
+  width: 120px;
+  height: 40px;
+}
+
+.user-edit-btn::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #00fa9a;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.user-edit-btn:hover {
+  color: #fff;
+  background-color: #00a3af;
+}
+
+.user-edit-btn:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.user-edit-box {
+  width: 50%;
+  margin: auto;
+}
+
+.user-edit-box textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.user-edit-box h4 {
+  border-bottom: 1px solid #006e54;
+  border-left: 10px solid #006e54;
+  padding: 7px;
+}
+
+/*退会*/
+
+.quit-btn {
+  position: relative;
+  display: inline-block;
+  padding: .56em .1em;
+  border: 2px solid #333;
+  color: #333;
+  text-align: center;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  font-family: 'Comic Sans MS',sans-serif;
+  width: 120px;
+  height: 40px;
+}
+
+.quit-btn::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #00fa9a;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.quit-btn:hover {
+  color: #fff;
+  background-color: #d9333f;
+}
+
+.quit-btn:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*投稿編集*/
+
+.post-action-zone {
+  list-style: none;
+  font-style: normal;
+  margin:10px;
+}
+
+.post-edit-btn {
+  position: relative;
+  display: inline-block;
+  padding: .56em .1em;
+  border: 2px solid #333;
+  color: #333;
+  text-align: center;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  font-family: 'Comic Sans MS',sans-serif;
+  width: 120px;
+  height: 40px;
+}
+
+.post-edit-btn::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #00fa9a;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.post-edit-btn:hover {
+  color: #fff;
+  background-color: #54917f;
+}
+
+.post-edit-btn:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*投稿削除*/
+
+.post-delete-btn {
+  position: relative;
+  display: inline-block;
+  padding: .56em .1em;
+  border: 2px solid #333;
+  color: #333;
+  text-align: center;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  font-family: 'Comic Sans MS',sans-serif;
+  width: 120px;
+  height: 40px;
+}
+
+.post-delete-btn::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  content: '';
+  width: 101%;
+  height: 105%;
+  background-color: #00fa9a;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.post-delete-btn:hover {
+  color: #fff;
+  background-color: #ea5550;
+}
+
+.post-delete-btn:hover::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/*ログイン後トップ*/
+
+.user-box {
+  float: left;
+  margin:2em 1em;
+  position: relative;
+  padding: 0.5em 1.5em;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+
+.user-box:before, .user-box:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: -webkit-calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-color: black;
+}
+
+.user-box:before {left: 10px;}
+.user-box:after {right: 10px;}
+.user-box p {
+    padding-top:  4px;
+    text-align: center;
+    margin: 0;
+}
+
+.user-image {
+  margin: 0 auto;
+}
+
+.post-list-nav {
+    display: table;
+    width: 100%;
+    background: #FFF;
+}
+
+.post-nav-item {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.post-nav-item a {
+    display: block;
+    padding: 15px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.your-list-nav {
+    display: table;
+    width: 100%;
+    background: #FFF;
+}
+
+.your-nav-item {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.your-nav-item a {
+    display: block;
+    margin: 5px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
 }

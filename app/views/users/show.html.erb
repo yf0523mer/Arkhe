@@ -1,46 +1,54 @@
-<%= render 'posts/list', results: @results, search: @search %>
+<div class="container">
 
-<%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %>
-<% if @users.id == current_user.id || current_user.admin == true %>
-	<%= @users.last_name %>
-	<%= @users.first_name %>
-<% end %>
-<%= @users.nickname %>
-<%= @users.introduction %>
+<div class="user-action-zone col-sm-3">
+  <%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %><br>
+  <% if @users.id == current_user.id || current_user.admin == true %>
+  	<%= @users.last_name %>
+  	<%= @users.first_name %><br>
+  <% end %>
+  <%= @users.nickname %><br>
+  <%= @users.introduction %>
 
-<% @users ||= current_user %>
-<div class="stats">
-  <a href="<%= following_user_path(@users) %>">
-    <strong id="following" class="stat">
-      <%= @users.following.count %>
-    </strong>
-    following
-  </a>
-  <a href="<%= followers_user_path(@users) %>">
-    <strong id="followers" class="stat">
-      <%= @users.followers.count %>
-    </strong>
-    followers
-  </a>
-</div>
+  <% @users ||= current_user %>
+  <div class="stats follow-zone">
+    <a href="<%= following_user_path(@users) %>" class="follow-btn" style="text-decoration:none; margin: 5px;">
+      <strong id="following" class="stat">
+        <%= @users.following.count %>
+      </strong>
+      following
+    </a><br>
+    <a href="<%= followers_user_path(@users) %>" class="follow-btn" style="text-decoration:none;">
+      <strong id="followers" class="stat">
+        <%= @users.followers.count %>
+      </strong>
+      followers
+    </a>
+  </div>
 
 <%= render 'relationships/list', users: @users %>
 
 	<% if @users.id == current_user.id || current_user.admin == true %>
-		<%= link_to "編集", edit_user_path(@users.id), class:"edit_user_#{@users.id} btn-sm btn-success" %>
-		<%= link_to "退会", user_path(@users.id, :user => {:deleted => 'true'}), method: :delete, class:"destroy_user_#{@users.id} btn-sm btn-danger", "data-confirm" => "Arkheを退会します。よろしいですか？" %>
+		<%= link_to "User Edit", edit_user_path(@users.id), class:"edit_user_#{@users.id} user-edit-btn", style:"text-decoration:none; margin-bottom:5px;" %><br>
+		<%= link_to "Quit", user_path(@users.id, :user => {:deleted => 'true'}), method: :delete, class:"destroy_user_#{@users.id} quit-btn", style:"text-decoration:none;", "data-confirm" => "Arkheを退会します。よろしいですか？" %>
 	<% end %>
+</div>
 
-	<h3>投稿一覧</h3>
+  <%= render 'posts/list', results: @results, search: @search %>
+<div class="col-sm-8">
+	<h3>Your Posts List</h3>
+  <div class="post-action-zone">
 		<% @posts.each do |post| %>
       <span class="post-index"><%= link_to post_path(post.id) do %>
-        <%= attachment_image_tag post.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '60x60', class:"post-image" %>
+        <li class="your-nav-item"><%= attachment_image_tag post.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '60x60', class:"post-image" %>
         <% end %>
       </span>
 			<%=link_to post.title, post_path(post.id), class:"post-title" %>
       <% if @user == current_user %>
-            <%= link_to "編集", edit_post_path(post.id), class:"btn-sm btn-success" %>
-            <%= link_to "削除", post_path(post.id, :post => {:deleted => 'true'}), method: :delete, class:"destroy_post#{post.id} btn-sm btn-danger", "data-confirm" => "投稿を削除します。よろしいですか？" %>
-        <% end %>
+            <%= link_to "Post Edit", edit_post_path(post.id), class:"post-edit-btn", style:"text-decoration:none;" %>
+            <%= link_to "Post Delete", post_path(post.id, :post => {:deleted => 'true'}), method: :delete, class:"destroy_post#{post.id} post-delete-btn", style:"text-decoration:none;", "data-confirm" => "投稿を削除します。よろしいですか？" %>
+        <% end %></li>
 		<% end %>
+  </div>
+</div>
+</div>
 

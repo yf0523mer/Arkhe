@@ -1,88 +1,132 @@
 <div class="container">
+  <input name="places_json" type="hidden" class='places_json' value=<%= @places_json %> />
 
-<div>
-    <%= @post.title %>
-    <%= @post.text %>
-    <%= @post.distance %>
-    <% @post.images.each do |image| %>
-      <%= attachment_image_tag image, :image, :fill, 200, 200, class:"", size: '200x200' %>
-    <% end %>
-</div>
+  <div class="post-detail">
+    <span><%= link_to user_path(@post.user_id) do %>
+      <%= attachment_image_tag @post.user, :image, :fill, 40, 40, fallback: "No_image.png",size: '40x40', class:"user-image", style:"text-decoration:none;" %>
+      <% end %>
+    </span>
+      <%= @post.title %>
+      <%= @post.text %>
+      <%= @post.distance %>
+      <% @post.images.each do |image| %>
+        <%= attachment_image_tag image, :image, :fill, 200, 200, class:"", size: '200x200' %>
+      <% end %>
+  </div>
 
-<h2>gmap</h2>
-<!-- form_withはデフォルトでremote: trueの挙動になります -->
-<%= form_with url: map_request_path, method: :get do |f|%>
-  <%= f.text_field :address %>
-  <%= f.submit '地図表示' %>
-<% end %>
+  <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
 
-<div id="map">
-</div>
-
-<style>
-#map{
-  height: 400px;
-}
-</style>
-
-<div class="favorite-zone">
-  <% if @post.user_id != current_user.id %>
-    <% if @post.favorited_by?(current_user) %>
-      <li>
-        <%= link_to post_favorites_path(@post), method: :delete do %>
-          <i class="favorite-btn" aria-hidden="true">
-            <%= @post.favorites.count%> Like
-          </i>
-        <% end %>
-      </li>
+  <div class="favorite-zone">
+    <% if @post.user_id != current_user.id %>
+      <% if @post.favorited_by?(current_user) %>
+        <li>
+          <%= link_to post_favorites_path(@post), method: :delete do %>
+            <i class="favorite-btn" aria-hidden="true">
+              <%= @post.favorites.count%> Like
+            </i>
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to post_favorites_path(@post), method: :post do %>
+            <i class="favorite-btn" aria-hidden="true">
+              <%= @post.favorites.count %> Like
+            </i>
+          <% end %>
+        </li>
+      <% end %>
     <% else %>
       <li>
-        <%= link_to post_favorites_path(@post), method: :post do %>
-          <i class="favorite-btn" aria-hidden="true">
-            <%= @post.favorites.count %> Like
-          </i>
-        <% end %>
-      </li>
-    <% end %>
-  <% else %>
-    <li>
-      <i class="favorite-number" aria-hidden="true">
-            <%= @post.favorites.count %> Like
-      </i>
-    <% end %>
-  </li>
-</div>
+        <i class="favorite-number" aria-hidden="true">
+              <%= @post.favorites.count %> Like
+        </i>
+      <% end %>
+    </li>
+  </div>
 
-<div>
-<% @post.comments.each do |comment| %>
-    <span><%= comment.user.nickname %></span>
-    <span><%= comment.comment %></span>
-    <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-<% end %>
-</div>
-<div>
-<%= form_for [@post, @comment] do |f| %>
-    <div class="row">
-        <div class="col-sm-12">
-            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-        </div>
-    </div>
-        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-<% end %>
-</div>
+  <div>
+  <% @post.comments.each do |comment| %>
+      <span><%= comment.user.nickname %></span>
+      <span><%= comment.comment %></span>
+      <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+  <% end %>
+  </div>
+  <div>
+  <%= form_for [@post, @comment] do |f| %>
+      <div class="row">
+          <div class="col-sm-12">
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+          </div>
+      </div>
+          <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+  <% end %>
+  </div>
 </div>
 
 
 <script>
-  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
-
-  function initMap(){
-    mapInstance = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.658, lng: 139.7},
-    zoom: 14
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: { lat: gon.location[0], lng: gon.location[1] }
     });
+    for(var i = 0; i < gon.locations.length; i++){
+      new google.maps.Marker({
+        position: { lat: gon.locations[i][0], lng: gon.locations[i][1] },
+        // title: gon.locations[i].name,
+        map: map
+      });
+    }
   }
+
+// ルート
+
+var rendererOptions = {
+    suppressMarkers : true
+}
+var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+var directionsService = new google.maps.DirectionsService();
+
+// 複数地点のルートを検索する
+function search() {
+    var points = $('google.maps.Marker');
+
+    // 2地点以上のとき
+    if (points.length >= 2){
+        var origin; // 開始地点
+        var destination; // 終了地点
+        var waypoints = []; // 経由地点
+
+        // origin, destination, waypointsを設定する
+        for (var i = 0; i < points.length; i++) {
+            points[i] = new google.maps.LatLng($(points[i]).attr("data-lat"), $(points[i]).attr("data-lng"));
+            if (i == 0){
+                origin = points[i];
+            } else if (i == points.length-1){
+                destination = points[i];
+            } else {
+                waypoints.push({ location: points[i], stopover: true });
+            }
+        }
+        // リクエスト作成
+        var request = {
+            origin:      origin,
+            destination: destination,
+            waypoints: waypoints,
+            travelMode:  google.maps.TravelMode.DRIVING
+        };
+        // ルートサービスのリクエスト
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                // 結果を表示する
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+}
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
-
-
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+        type="text/javascript"></script>

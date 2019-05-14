@@ -40,9 +40,11 @@ gem 'kaminari','~> 1.1.1'
 gem 'ransack'
 gem 'devise'
 gem 'geocoder'
+gem 'gmaps4rails'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'cocoon'
+gem 'gon'
 gem 'will_paginate'
 gem 'pry-byebug'
 group :development, :test do

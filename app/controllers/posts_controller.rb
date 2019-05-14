@@ -12,14 +12,23 @@ class PostsController < ApplicationController
       @post.places.build
 	end
 
-  def show
+    def show
       @post = Post.find(params[:id])
-      if @post.deleted == true
+      @user = User.find(@post.user_id)
+      if @user.deleted == true || @post.deleted == true
         redirect_to users_path
       else
         @comment = Comment.new
         @search = Post.ransack(params[:q])
         @results = @search.result
+        @places = @post.places
+        # @places_json = @places.to_json.html_safe
+        root()
+        # results = Geocoder.search(@places_json[0]["address"])
+        
+        #results = Geocoder.search("代々木公園")
+        # @latlng = results.first.coordinates
+
       end
   end
 
@@ -63,6 +72,18 @@ class PostsController < ApplicationController
       respond_to do |format|
         format.js
       end
+  end
+
+  def root()
+      @post = Post.find(params[:id])
+      @user = User.find(@post.user_id)
+      @data = []
+      @post.places.each do |place|
+        @address = place.address
+        @data << Geocoder.coordinates(@address)
+      end
+      gon.locations = @data
+      gon.location = @data.first
   end
 
 	private
