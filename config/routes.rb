@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'users#top'
   get '/map_request', to: 'posts#map', as: 'map_request'
+  get '/root_request', to: 'posts#root', as: 'root_request'
   get 'posts/' => 'posts#index'
+  get 'management' => 'users#management'
 
   resources :users
   resources :posts

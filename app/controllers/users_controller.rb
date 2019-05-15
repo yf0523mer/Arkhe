@@ -1,23 +1,32 @@
 class UsersController < ApplicationController
-
-
 	def top
+	end
 
+	def management
+		if current_user.admin == false
+			redirect_to user_path(current_user)
+		else
+			@users = User.where(deleted: 'false')
+		end
 	end
 
 	def index
 		@user = current_user
 		@search = Post.ransack(params[:q])
 	    @results = @search.result.where(deleted: 'false')
-	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false')
+	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').limit(3).order(:created_time)
 	end
 
 	def show
 		@user = current_user
 		@users = User.find(params[:id])
-	    @search = Post.ransack(params[:q])
-	    @results = @search.result.where(deleted: 'false')
-	    @posts = @users.posts.where(deleted: 'false')
+		if @users.deleted == true
+			redirect_to users_path
+		else
+		    @search = Post.ransack(params[:q])
+		    @results = @search.result.where(deleted: 'false')
+		    @posts = @users.posts.where(deleted: 'false')
+		end
 	end
 
 	def edit
@@ -43,14 +52,14 @@ class UsersController < ApplicationController
     def following
 	    @title = "Following"
 	    @user  = User.find(params[:id])
-	    @users = @user.following.paginate(page: params[:page])
+	    @users = @user.following.paginate(page: params[:page]).where(deleted: 'false')
 	    render 'show_follow'
 	end
 
 	def followers
 	    @title = "Followers"
 	    @user  = User.find(params[:id])
-	    @users = @user.followers.paginate(page: params[:page])
+	    @users = @user.followers.paginate(page: params[:page]).where(deleted: 'false')
 	    render 'show_follow'
 	end
 

@@ -1,13 +1,9 @@
-<% provide(:title, 'All posts') %>
-	<h1>投稿一覧</h1>
-
-	<%= search_form_for @search  do |f| %>
-	  <div class="form-group">
-	    <%= f.label :title_cont, "title" %>
-	    <%= f.text_field :title_cont, class: "form-control" %>
-	  </div>
-	  <div class="actions"><%= f.submit "Search" %></div>
-	<% end %>
+<div class="container">
+	<% provide(:title, 'All posts') %>
+	<%= render 'posts/list', results: @results, search: @search %>
+</div>
+<div class="result-list">
+	<h3>Results</h3>
 
 	<% if @results.any? %>
  		<% @results.each do |result| %>
@@ -19,3 +15,4 @@
 	   		<p><%= link_to result.title, post_path(result.id), class:"post-title" %></p>
 	 	<% end %>
 	<% end %>
+</div>

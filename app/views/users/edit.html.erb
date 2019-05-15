@@ -1,27 +1,27 @@
-<div class="">
-	<%= form_for @user, url: user_path do |f| %>
-		<b>苗字</b>
-			<%= f.text_field :last_name, autofocus: true, id:"inputLastname", placeholder:"苗字"%>
-		<b>苗字かな</b>
-			<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastnamekana", placeholder:"苗字かな"%>
-		<b>名前</b>
-			<%= f.text_field :first_name, autofocus: true, id:"inputFirstname", placeholder:"名前"%>
-		<b>名前かな</b>
-			<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstname", placeholder:"名前かな"%>
-		<b>ニックネーム</b>
-			<%= f.text_field :nickname, autofocus: true, id:"inputNickname", placeholder:"ニックネーム"%>
-		<b>E-mail</b>
-			<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"E-mail"%>
-		<b>ユーザ画像</b>
-	        <%= f.attachment_field :image, class: "image", type:'file' %>
-		<br>
-		<div class="preview"></div>
-		<div class="user-edit">
-			<b>Introduction</b>
-				<%= f.text_area :introduction, autofocus: true, class:"introduction", id:"inputIntroduction", placeholder:"自己紹介"%>
-			<%= f.submit 'ユーザ編集',class: 'btn btn-default col-lg-2' %>
-	<% end %>
-		</div>
+<div class="container">
+  <div class="user-edit-box">
+  	<%= form_for @user, url: user_path do |f| %>
+  		<h4>苗字</h4>
+  			<%= f.text_field :last_name, autofocus: true, id:"inputLastname", placeholder:"苗字"%>
+  		<h4>苗字かな</h4>
+  			<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastnamekana", placeholder:"苗字かな"%>
+  		<h4>名前</h4>
+  			<%= f.text_field :first_name, autofocus: true, id:"inputFirstname", placeholder:"名前"%>
+  		<h4>名前かな</h4>
+  			<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstname", placeholder:"名前かな"%>
+  		<h4>ニックネーム</h4>
+  			<%= f.text_field :nickname, autofocus: true, id:"inputNickname", placeholder:"ニックネーム"%>
+  		<h4>E-mail</h4>
+  			<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"E-mail"%>
+  		<h4>ユーザ画像</h4>
+  	        <%= f.attachment_field :image, class: "image", type:'file' %>
+  		<br>
+  		<div class="preview"></div>
+  		<h4>Introduction</h4>
+  				<%= f.text_area :introduction, autofocus: true, class:"introduction", id:"inputIntroduction", placeholder:"自己紹介"%><br>
+  			<%= f.submit 'User Update',class: 'user-edit-btn', style:"width:150px; margin-top:10px; margin-bottom:30px;" %>
+  	<% end %>
+  </div>
 </div>
 
 <script>

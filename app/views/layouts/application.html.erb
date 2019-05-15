@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+    <%= include_gon %>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -18,11 +19,11 @@
               <nav class="nav navbar-nav navbar-left">
                 <% if user_signed_in? %>
                   <%= link_to users_path do %>
-                      <%= image_tag "logo2.png", class: 'mypae-image', style: "width: 200px; height: 63px; margin-top: 20px;" %>
+                      <%= image_tag "logo2.png", class: 'mypae-image', style: "width: 200px; height: 63px; margin-top: 20px; margin-left: 30px;" %>
                       <% end %>
                 <% else %>
                   <span><%= link_to root_path do %>
-                      <%= image_tag "logo2.png", class: 'mypae-image', style: "width: 200px; height: 63px; margin-top: 20px;" %>
+                      <%= image_tag "logo2.png", class: 'mypae-image', style: "width: 200px; height: 63px; margin-top: 20px; margin-left: 30px;" %>
                       <% end %>
                   <% end %>
                   </span>
@@ -34,6 +35,9 @@
                           </li>
                           <li class="header-right">
                             <%= link_to "管理者マイページ", user_path(current_user.id), class: "header-link fas fa-home" %>
+                          </li>
+                          <li class="header-right">
+                            <%= link_to "ユーザ一覧", management_path, class: "header-link fas fa-users" %>
                           </li>
                           <li class="header-right">
                               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-link fas fa-sign-out-alt" %>

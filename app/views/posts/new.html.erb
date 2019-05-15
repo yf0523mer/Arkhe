@@ -16,6 +16,9 @@
 	  height: 400px;
 	}
 	</style>
+
+	<div class="preview"></div>
+
 	<%= form_for @post, url: posts_path do |f| %>
 		<h3>行った場所</h3>
 	    <div id='places'>
@@ -34,10 +37,45 @@
 		<b>距離</b>
 			<%= f.text_field :distance, autofocus: true, id:"inputFirstname", placeholder:"距離"%>
 			<h3>写真投稿</h3>
-				<%= f.attachment_field :images_images, multiple: true %>
+				<%= f.attachment_field :images_images, multiple: true, class:"image", type:"file" %>
 		<%= f.submit '新規投稿',class: 'btn btn-default col-lg-2' %>
 	<% end %>
 </div>
+
+<script>
+	$(function(){
+  //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+  $('form').on('change', 'input[type="file"]', function(e) {
+    var file = e.target.files[0],
+        reader = new FileReader(),
+        $preview = $(".preview");
+        t = this;
+
+    // 画像ファイル以外の場合は何もしない
+    if(file.type.indexOf("image") < 0){
+      return false;
+    }
+
+    // ファイル読み込みが完了した際のイベント登録
+    reader.onload = (function(file) {
+      return function(e) {
+        //既存のプレビューを削除
+        $preview.empty();
+        // .prevewの領域の中にロードした画像を表示するimageタグを追加
+        $preview.append($('<img>').attr({
+                  src: e.target.result,
+                  width: "200px",
+                  class: "preview",
+                  title: file.name
+              }));
+      };
+    })(file);
+
+    reader.readAsDataURL(file);
+  });
+});
+
+</script>
 
 <script>
   let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
