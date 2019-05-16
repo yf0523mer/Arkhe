@@ -17,7 +17,8 @@
     height: 400px;
   }
   </style>
-  <%= form_for @post, url: edit_post_path do |f| %>
+
+  <%= form_for @post, url: post_path do |f| %>
     <h3>行った場所</h3>
       <div id='places'>
           <%= f.fields_for :places do |place| %>

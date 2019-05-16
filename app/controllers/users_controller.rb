@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!, except: [:top]
 	def top
 	end
 
@@ -12,8 +13,11 @@ class UsersController < ApplicationController
 
 	def index
 		@user = current_user
+		#論理削除済みのユーザを取ってくる
+		@delete_user = User.where(deleted: 'true')
 		@search = Post.ransack(params[:q])
 	    @results = @search.result.where(deleted: 'false')
+	    #フォローしているユーザの最新投稿３件を持ってくる
 	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').limit(3).order(:created_time)
 	end
 
