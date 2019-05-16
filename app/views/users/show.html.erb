@@ -13,13 +13,13 @@
   <div class="stats follow-zone">
     <a href="<%= following_user_path(@users) %>" class="follow-btn" style="text-decoration:none; margin: 5px;">
       <strong id="following" class="stat">
-        <%= @users.following.count %>
+        <%= @users.following.where(deleted: 'false').count %>
       </strong>
       following
     </a><br>
     <a href="<%= followers_user_path(@users) %>" class="follow-btn" style="text-decoration:none;">
       <strong id="followers" class="stat">
-        <%= @users.followers.count %>
+        <%= @users.followers.where(deleted: 'false').count %>
       </strong>
       followers
     </a>

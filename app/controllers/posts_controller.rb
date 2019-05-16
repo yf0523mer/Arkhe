@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
 	def index
+      #論理削除済みのユーザを取ってくる
+      @delete_user = User.where(deleted: 'true')
       #(params[:q])に検索パラメーターが入り、Productテーブルを検索する@searchオブジェクトを生成
       @search = Post.ransack(params[:q])
       #検索結果を表示する@resultsオブジェクトを生成
@@ -8,6 +11,7 @@ class PostsController < ApplicationController
 
   def new
   		@post = Post.new
+      #@postに関連づけたimages,placesをbuild
   		@post.images.build
       @post.places.build
 	end
@@ -21,14 +25,9 @@ class PostsController < ApplicationController
         @comment = Comment.new
         @search = Post.ransack(params[:q])
         @results = @search.result
-        @places = @post.places
-        # @places_json = @places.to_json.html_safe
+        @places = @post.places.order("order ASC")
+        #root()のメソッド呼び出し
         root()
-        # results = Geocoder.search(@places_json[0]["address"])
-        
-        #results = Geocoder.search("代々木公園")
-        # @latlng = results.first.coordinates
-
       end
   end
 
@@ -62,7 +61,8 @@ class PostsController < ApplicationController
 	def destroy
   		@post = Post.find(params[:id])
   		@post.update(delete_post_params)
-  		redirect_to user_path(current_user.id) #今はとりあえず
+      #今はとりあえずユーザのパスへ遷移
+  		redirect_to user_path(current_user.id)
 	end
 
   def map

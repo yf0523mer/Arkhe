@@ -16,13 +16,13 @@
 	  <div class="stats follow-zone">
 	    <a href="<%= following_user_path(@users) %>" class="follow-btn" style="text-decoration:none; margin: 5px;">
 	      <strong id="following" class="stat">
-	        <%= @users.following.count %>
+	        <%= @users.following.where(deleted: 'false').count %>
 	      </strong>
 	      following
 	    </a><br>
 	    <a href="<%= followers_user_path(@users) %>" class="follow-btn" style="text-decoration:none;">
 	      <strong id="followers" class="stat">
-	        <%= @users.followers.count %>
+	        <%= @users.followers.where(deleted: 'false').count %>
 	      </strong>
 	      followers
 	    </a>
@@ -33,7 +33,7 @@
 		<%= render 'posts/list', results: @results, search: @search %>
 
 		<div class="post-list-nav">
-			<% @feed_items.each do |post| %>
+			<% @feed_items.where.not(user_id: @delete_user).each do |post| %>
 				<li class="post-nav-item"><%= link_to post_path(post.id) do %>
 			              	<%= attachment_image_tag post.images.last, :image, :fill, 200, 200, fallback: "No_image.png",size: '200x200', class:"post-image" %>
 			              <% end %>
