@@ -79,6 +79,7 @@ class PostsController < ApplicationController
   def root()
       @post = Post.find(params[:id])
       @user = User.find(@post.user_id)
+      #
       @data = []
       @post.places.each do |place|
         @address = place.address
