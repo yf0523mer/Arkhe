@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 		@search = Post.ransack(params[:q])
 	    @results = @search.result.where(deleted: 'false')
 	    #フォローしているユーザの最新投稿３件を持ってくる
-	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').limit(3).order(:created_time)
+	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(3)
 	end
 
 	def show

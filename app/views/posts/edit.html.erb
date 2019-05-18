@@ -37,7 +37,7 @@
       <%= f.text_field :distance, autofocus: true, id:"inputFirstname", placeholder:"距離"%>
       <h3>写真投稿</h3>
         <%= f.attachment_field :images_images, multiple: true %>
-    <%= f.submit '新規投稿',class: 'btn btn-default col-lg-2' %>
+    <%= f.submit '編集',class: 'btn btn-default col-lg-2' %>
   <% end %>
 </div>
 
@@ -51,5 +51,10 @@
     zoom: 14
     });
   }
+
+  // $("#removeb").on("click", function(){
+  //   var target = $(event.target);
+  //   target.remove();
+  // });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
