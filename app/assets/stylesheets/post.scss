@@ -21,7 +21,7 @@
   	transition-duration: 0.3s;
 }
 
- .post-index a:hover{
+.post-index a:hover{
 	text-decoration: none;
 }
 
@@ -149,10 +149,23 @@
     padding: 10px;
 }
 
+.post-detail {
+    padding-left: 15px;
+}
+
 .post-detail a:hover{
     text-decoration: none;
 }
 
 .result-list {
   font-family: 'Comic Sans MS',sans-serif;
+}
+
+.post-box {
+  font-family: 'Comic Sans MS',sans-serif;
+}
+
+.post-text {
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  margin: 20px;
 }

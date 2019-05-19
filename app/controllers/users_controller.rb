@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 		if current_user.admin == false
 			redirect_to user_path(current_user)
 		else
-			@users = User.where(deleted: 'false')
+			@search = User.ransack(params[:q])
+			@results = @search.result.where(deleted: 'false')
 		end
 	end
 
@@ -19,6 +20,8 @@ class UsersController < ApplicationController
 	    @results = @search.result.where(deleted: 'false')
 	    #フォローしているユーザの最新投稿３件を持ってくる
 	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(3)
+	    favos = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
+	    @all_ranks = Post.where(id:favos,deleted:'false').limit(3)
 	end
 
 	def show

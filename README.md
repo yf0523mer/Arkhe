@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 概要
+このサイトは出不精の人やお散歩の記録ができる、その名も[Arkhe]です。
+「歩け」と古代ギリシャの自然哲学で，世界の原理，始源，根拠などの意を表す語「Arkhē (アルケー)」を掛けたわけですね。
+わあ面白い。
 
-Things you may want to cover:
+# 使い方
+事前に用意するもの
+・メールアドレス
+自分のメールアドレスで、ユーザ新規登録を行うことができます。
+ユーザ登録後は、自分の散歩したルートや写真を登録したり、他の人の投稿を見たり、お互いにフォローしたりできます。
+散歩をしたくなった時には是非参考にしてください。
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 使用上の注意
+このサイトの目玉機能はお散歩に行った場所を記録し、ルートを表示させること…なのですが
+GoogleMAP APIの仕様の都合上、登録した出発地点から到着地点までの最適ルートが出るため、
+あまり近い場所を登録するとルートが出ません。ごめんなさい。
