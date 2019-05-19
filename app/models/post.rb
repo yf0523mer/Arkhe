@@ -6,9 +6,8 @@ class Post < ApplicationRecord
 	has_many :comments, dependent: :destroy
 	has_many :favorites, dependent: :destroy
 	has_many :places
-	accepts_nested_attributes_for :places
+	accepts_nested_attributes_for :places, allow_destroy: true
 
-	
 
 	def favorited_by?(user)
           favorites.where(user_id: user.id).exists?

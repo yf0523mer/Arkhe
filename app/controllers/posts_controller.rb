@@ -46,6 +46,7 @@ class PostsController < ApplicationController
   def edit
       @user = current_user
       @post = Post.find(params[:id])
+      @post.places.build
       if current_user.id == @post.user_id || current_user.admin == true
       else
         redirect_to post_path(@post.id)
@@ -55,6 +56,7 @@ class PostsController < ApplicationController
 	def update
   		@post = Post.find(params[:id])
   		@post.update(post_params)
+      binding.pry
   		redirect_to post_path(@post.id)
 	end
 
@@ -77,6 +79,7 @@ class PostsController < ApplicationController
   def root()
       @post = Post.find(params[:id])
       @user = User.find(@post.user_id)
+      #
       @data = []
       @post.places.each do |place|
         @address = place.address
@@ -89,7 +92,7 @@ class PostsController < ApplicationController
 	private
     def post_params
         params.require(:post).permit(:title, :user_id, :text, :distance, :deleated,
-          images_images: [], places_attributes: [:address,:order])
+          images_images: [], places_attributes: [:address, :order, :_destroy])
     end
     def delete_post_params
         params.require(:post).permit(:deleted)

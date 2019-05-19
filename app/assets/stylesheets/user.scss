@@ -25,6 +25,7 @@
     border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
     cursor: pointer;
     transition-duration: 0.3s;
+    padding: 5px;
 }
 
 .user-image:hover{
@@ -32,26 +33,61 @@
     transition-duration: 0.3s;
 }
 
+.user-index {
+    margin: auto;
+    width: 70%;
+}
+
 .user-index a:hover{
     text-decoration: none;
 }
 
+.user-index table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.user-index table tr{
+  border-bottom: solid 1px #eee;
+  cursor: pointer;
+}
+
+.user-index table tr:hover{
+  background-color: #d4f0fd;
+}
+
+.user-index table th,table td{
+  text-align: center;
+  width: 25%;
+  padding: 15px 0;
+}
+
 .follow-title h3 {
   font-family: 'Comic Sans MS',sans-serif;
+  width: 70%;
+  margin: 10px auto;
+  text-align: center;
+  font-weight: bold;
 }
 
 #top-page {
   width: 100%;
   height: 600px;
-  background-image: url(garden.jpg);
+  background-image: url(gardenE.jpg);
   background-size: cover;
+  background-position: center; /* 背景画像を中央に配置 */
 }
 
 .text-box {
-  position: relative;
+  width: 70%;
+  height: 500px; /* 親の高さに揃える */
+  text-align: center; /* 文字を真ん中に寄せる */
+  padding-top: 230px; /* 上側の内側の余白で垂直方向の位置を調整 */
+  margin: auto;
 }
 
-.text-box p {
+.text-box .text-text {
   color: white;/*文字は白に*/
   font-weight: bold; /*太字に*/
   font-size: 3em;/*サイズ2倍*/
@@ -59,9 +95,8 @@
   -ms-transform: translate(-50%,-50%);
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
-  display        : inline-block;
+  display        : inline;
   text-shadow: 0 0 15px black;
-  width: 100%;
 }
 
 .top-text1 {
@@ -69,8 +104,61 @@
   height: 600px;
   display: block;
   width: 100%;
-  background-image: url(bench.jpg);
+  background-image: url(benchE.jpg);
   background-size: cover;
+  background-position: center; /* 背景画像を中央に配置 */
+}
+
+.text-box1 {
+  width: 70%;
+  height: 500px; /* 親の高さに揃える */
+  text-align: center; /* 文字を真ん中に寄せる */
+  padding-top: 110px; /* 上側の内側の余白で垂直方向の位置を調整 */
+  margin: auto;
+}
+
+.top-text1 p {
+  color: white;/*文字は白に*/
+  font-weight: bold; /*太字に*/
+  font-size: 3em;/*サイズ2倍*/
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display        : inline;
+  text-shadow: 0 0 15px black;
+  width: 100%;
+}
+
+.top-text2 {
+  position: relative;
+  height: 600px;
+  display: block;
+  width: 100%;
+  background-image: url(bridgeE.jpg);
+  background-size: cover;
+  background-position: center; /* 背景画像を中央に配置 */
+}
+
+.text-box2 {
+  width: 70%;
+  height: 500px; /* 親の高さに揃える */
+  text-align: center; /* 文字を真ん中に寄せる */
+  padding-top: 110px; /* 上側の内側の余白で垂直方向の位置を調整 */
+  margin: auto;
+}
+
+.top-text2 p {
+  color: white;/*文字は白に*/
+  font-weight: bold; /*太字に*/
+  font-size: 3em;/*サイズ2倍*/
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display        : inline;
+  text-shadow: 0 0 15px black;
+  width: 100%;
 }
 
 div .top-title {
@@ -419,4 +507,29 @@ div .top-title {
     color: #666;
     text-decoration: none;
     font-size: 14px;
+}
+
+.following-post-title {
+  font-family: 'Comic Sans MS',sans-serif;
+  font-size: 25px;
+}
+
+.ranking-box {
+  padding: 10px;
+  margin: 28px 14px 28px 14px;
+  text-decoration: none;
+}
+
+.ranking-box a:hover {
+  text-decoration: none;
+}
+
+.ranking-box li {
+  text-decoration: none;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.ranking-post {
+  padding-left: 15px;
 }

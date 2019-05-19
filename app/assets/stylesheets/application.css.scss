@@ -18,7 +18,7 @@
  @import "bootstrap";
 
  #map {
-    height: 800px;
+    height: 600px;
     width: 100%;
 }
 
@@ -125,6 +125,13 @@ footer {
 }
 .Top3 {
   background-image: url(Top3.jpg);
+}
+.Top4 {
+  background-image: url(Top4.jpg);
+  background-position: top;
+}
+.Top5 {
+  background-image: url(Top5.jpg);
 }
 #container{
   position: relative;

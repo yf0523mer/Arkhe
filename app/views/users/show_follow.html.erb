@@ -6,14 +6,18 @@
       <section class="stats">
         <% if @users.any? %>
           <div class="user-index">
+            <table>
             <% @users.each do |user| %>
-              <span><%= link_to user_path(user.id) do %>
-                      <%= attachment_image_tag user, :image, :fill, 40, 40, fallback: "No_image.png",size: '40x40', class:"user-image" %>
-                    <% end %>
-              </span>
-              <%= link_to user.nickname, user_path(user.id) %>
-            <% end %>
-          </div><br>
+            <tr>
+                <th><span><%= link_to user_path(user.id) do %>
+                        <%= attachment_image_tag user, :image, :fill, 70, 70, fallback: "No_image.png",size: '70x70', class:"user-image" %>
+                      <% end %>
+                </span></th>
+                <th><%= link_to user.nickname, user_path(user.id) %></th>
+              <% end %>
+            </tr><br>
+            </table>
+          </div>
         <% end %>
       </section>
     </aside>

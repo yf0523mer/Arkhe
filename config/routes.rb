@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/map_request', to: 'posts#map', as: 'map_request'
   get '/root_request', to: 'posts#root', as: 'root_request'
   get 'posts/' => 'posts#index'
-  get 'management' => 'users#management'
+  get 'management/' => 'users#management'
 
   resources :users
   resources :posts

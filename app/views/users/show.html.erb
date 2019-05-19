@@ -1,6 +1,6 @@
 <div class="container">
 
-<div class="user-action-zone col-sm-3">
+<div class="user-action-zone user-box col-sm-3">
   <%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %><br>
   <% if @users.id == current_user.id || current_user.admin == true %>
   	<%= @users.last_name %>
@@ -35,7 +35,7 @@
 
   <%= render 'posts/list', results: @results, search: @search %>
 <div class="col-sm-8">
-	<h3>Your Posts List</h3>
+	<h3 style="font-family: 'Comic Sans MS',sans-serif;">Your Posts List</h3>
   <div class="post-action-zone">
 		<% @posts.each do |post| %>
       <span class="post-index"><%= link_to post_path(post.id) do %>
