@@ -56,7 +56,6 @@ class PostsController < ApplicationController
 	def update
   		@post = Post.find(params[:id])
   		@post.update(post_params)
-      binding.pry
   		redirect_to post_path(@post.id)
 	end
 
@@ -91,7 +90,7 @@ class PostsController < ApplicationController
 
 	private
     def post_params
-        params.require(:post).permit(:title, :user_id, :text, :distance, :deleated,
+        params.require(:post).permit(:title, :user_id, :text, :deleated,
           images_images: [], places_attributes: [:address, :order, :_destroy])
     end
     def delete_post_params

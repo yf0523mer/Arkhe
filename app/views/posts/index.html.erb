@@ -3,7 +3,7 @@
 	<%= render 'posts/list', results: @results, search: @search %>
 </div>
 <div class="result-list">
-	<h3>Results</h3>
+	<h3>Results <i class="fas fa-search"></i></h3>
 
 	<% if @results.any? %>
  		<% @results.where.not(user_id: @delete_user).each do |result| %>

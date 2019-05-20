@@ -19,7 +19,8 @@
 
  #map {
     height: 600px;
-    width: 100%;
+    width: 80%;
+    margin: auto;
 }
 
 .top {
@@ -47,7 +48,7 @@ html, body{
     font-size: 14px;
     line-height: 1.42857143;
     color: #333333;
-    background-color: #fff;
+    background-color: #e5f9e0;
 }
 
 .container {
@@ -162,7 +163,7 @@ footer {
   font-style: normal;
   margin:10px;
   font-family: 'Comic Sans MS',sans-serif;
-  width: 600px;
+  width: 300px;
 }
 
 .search-btn {

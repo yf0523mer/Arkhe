@@ -8,31 +8,36 @@
         <%= attachment_image_tag @post.user, :image, :fill, 200, 200, fallback: "No_image.png",size: '200x200', class:"user-image", style:"text-decoration:none;" %>
         <% end %>
       </span>
-        <%= @post.title %>
-        <%= @post.text %>
-        <%= @post.distance %>
+      <div class="mybox">
+          <p style="font-size: 20px;"><%= @post.title %></p>
+          <p style="font-size: 18px;"><%= @post.text %></p>
+      </div>
         <% @post.images.each do |image| %>
-          <%= attachment_image_tag image, :image, :fill, 200, 200, class:"", size: '200x200' %>
-        <% end %><br>
+          <a href="<%= attachment_url(image, :image)%>" class="luminous">
+            <%= attachment_image_tag image, :image, :fill, 200, 200, class:"luminous", size: '200x200' %>
+          </a>
+        <% end %></span><br>
+        <table class="post-table">
+            <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Routes</p>
         <% @post.places.each do |p| %>
-          <%= p.address %>
+        <tr>
+          <th><%= p.address %></th>
           <% if current_user == @user || current_user.admin == 'true' %>
-            <%= link_to "place delete", place_path(p.id), method: :delete, class:"destroy_p_#{p.id} btn-sm btn-danger", "data-confirm" => "場所を削除します。よろしいですか？" %>
+            <th><%= link_to "place delete", place_path(p.id), method: :delete, class:"destroy_p_#{p.id} btn-sm btn-danger", "data-confirm" => "場所を削除します。よろしいですか？" %></th>
             <% else %>
-            <% end %><br>
-    <% end %>
+            <% end %>
+            </tr>
+        <% end %>
+    </table>
+    <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Total Distance</p>
+    <p id="distance"></p>
+    <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Travel Time(indication)</p>
+    <p id="time"></p>
     </div>
   </div>
-  <div class="">
-    <p>Total Distance</p>
-    <p id="distance"></p>
-  </div>
-  <div class="">
-    <p>Travel Time(indication)</p>
-    <p id="time"></p>
-  </div>
 
-  <h3>Walking Routes</h3>
+<h3>Walking Routes</h3>
+
     <div id="map"></div>
 
   <div class="favorite-zone">
@@ -83,6 +88,13 @@
 </div>
 </div>
 
+
+<script>
+    var luminousTrigger = document.querySelector('.luminous');
+    if( luminousTrigger !== null ) {
+        new LuminousGallery(luminousTrigger);
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   function initMap() {
