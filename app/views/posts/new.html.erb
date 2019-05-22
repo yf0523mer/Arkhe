@@ -1,42 +1,43 @@
 <div class="post-box">
-	<h2>New Post</h2>
-	<h2 style="font-family: 'Comic Sans MS',sans-serif;">Gmap</h2>
+    <div class="new-post-box">
+    	<h2>New Post</h2>
+    	<h2 style="font-family: 'Comic Sans MS',sans-serif;">Gmap</h2>
 	<!-- form_withはデフォルトでremote: trueの挙動になります -->
-	<%= form_with url: map_request_path, method: :get do |f|%>
-	  <%= f.text_field :address %>
-	  <%= f.submit '地図表示' %>
-	<% end %>
-
+    	<%= form_with url: map_request_path, method: :get do |f|%>
+    	  <%= f.text_field :address, style:"margin-bottom: 10px;" %>
+    	  <%= f.submit 'Map Search', class:"post-search-btn", style:"margin-bottom: 10px;" %>
+    	<% end %>
+    </div>
 	<div id="map">
 	</div>
 
-	<style>
-	#map{
-        width: 800px;
-	}
-	</style>
+    <div style="width: 80%; margin: auto;">
+	   <div class="preview"></div>
+    </div>
 
-	<div class="preview"></div>
+    <div class="new-post-box clip-box-a">
+        	<%= form_for @post, url: posts_path do |f| %>
+        		<h3>Where You went</h3>
+        	    <div id='places'>
+        		      <%= f.fields_for :places do |place| %>
+        		        <%= render 'place_fields', :f => place %>
+        		      <% end %>
+        		      <div class='links'>
+        		        <%= link_to_add_association 'add place', f, :places, class:"post-add-btn" %>
+        		    </div>
+            	</div>
 
-	<%= form_for @post, url: posts_path do |f| %>
-		<h3>Where You went</h3>
-	    <div id='places'>
-		      <%= f.fields_for :places do |place| %>
-		        <%= render 'place_fields', :f => place %>
-		      <% end %>
-		      <div class='links'>
-		        <%= link_to_add_association 'add place', f, :places %>
-		    </div>
-    	</div>
-
-		<b>Title</b>
-			<%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"Title"%>
-		<b>Text</b>
-			<%= f.text_field :text, autofocus: true, id:"inputLastnamekana", placeholder:"Text"%>
-		<h3>Image Post</h3>
-			<%= f.attachment_field :images_images, multiple: true, class:"image", type:"file" %>
-		<%= f.submit 'New Post',class: 'btn btn-default col-lg-2' %>
-	<% end %>
+        		<b>Title</b><br>
+        			<%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"Title"%><br>
+        		<b>Text</b><br>
+        			<%= f.text_area :text, autofocus: true, id:"inputLastnamekana", placeholder:"Text", :size=>"50x5"%>
+        		<h3>Image Post</h3>
+        			<%= f.attachment_field :images_images, multiple: true, class:"image", type:"file" %>
+                    <div class="post-btn-zone">
+        		      <%= f.submit 'New Post',class: 'post-btn' %>
+                    </div>
+        	<% end %>
+    </div>
 </div>
 
 <script>

@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/*トップ画面上へ行くcss*/
+
+#back{
+  position: fixed;
+  right: 50px;
+  bottom: 55px;
+}
+
+#back img{
+  width: 50px;
+}
+
+/*ここまで*/
+
 .image-to-circle {
     width:  180px;       /* ※縦横を同値に */
     height: 180px;       /* ※縦横を同値に */
@@ -12,7 +26,9 @@
 
 .preview {
 	margin: auto;
-	padding: 20px;
+	padding-left: 20px;
+  padding-right: 20px;
+  width: 400px;
 }
 
 .user-edit {
@@ -152,6 +168,37 @@
 }
 
 .top-text2 p {
+  color: white;/*文字は白に*/
+  font-weight: bold; /*太字に*/
+  font-size: 3em;/*サイズ2倍*/
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display        : inline;
+  text-shadow: 0 0 15px black;
+  width: 100%;
+}
+
+.top-text3 {
+  position: relative;
+  height: 600px;
+  display: block;
+  width: 100%;
+  background-image: url(LetterE.jpg);
+  background-size: cover;
+  background-position: center; /* 背景画像を中央に配置 */
+}
+
+.text-box3 {
+  width: 70%;
+  height: 500px; /* 親の高さに揃える */
+  text-align: center; /* 文字を真ん中に寄せる */
+  padding-top: 110px; /* 上側の内側の余白で垂直方向の位置を調整 */
+  margin: auto;
+}
+
+.top-text3 p {
   color: white;/*文字は白に*/
   font-weight: bold; /*太字に*/
   font-size: 3em;/*サイズ2倍*/
@@ -320,6 +367,7 @@ div .top-title {
 .user-edit-box {
   width: 50%;
   margin: auto;
+  font-family: 'Comic Sans MS', sans-serif,"游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
 }
 
 .user-edit-box textarea {
@@ -641,7 +689,7 @@ div .top-title {
 }
 
 .your-post-box {
- background-color: #fff;  /* 背景色 */
+ background-color: #f9f6e5;  /* 背景色 */
  border: 1px solid #ccc; /* 線の太さ・種類・色 */
  box-shadow:1px 1px 6px 0px #ccc;
  -moz-box-shadow:1px 1px 6px 0px #ccc;

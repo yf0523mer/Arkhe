@@ -1,54 +1,60 @@
-<h2>Sign up</h2>
+<div class="signin-box">
+  <div class="form-signin">
+    <h2 class="form-signin-heading">Sign in</h2>
+    <hr class="colorgraph"><br>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :"E-mail" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"E-mail" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"苗字" %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"Last name" %><br />
+        <%= f.text_field :last_name, autofocus: true, placeholder: "姓" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"苗字かな" %><br />
-    <%= f.text_field :last_name_kana, autofocus: true %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"Last name (kana)" %><br />
+        <%= f.text_field :last_name_kana, autofocus: true, placeholder: "姓(かな)" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"名前" %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"First name" %><br />
+        <%= f.text_field :first_name, autofocus: true, placeholder: "名" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"名前かな" %><br />
-    <%= f.text_field :first_name_kana, autofocus: true %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"First name (kana)" %><br />
+        <%= f.text_field :first_name_kana, autofocus: true, placeholder: "名(かな)" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"ニックネーム" %><br />
-    <%= f.text_field :nickname, autofocus: true %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"Nickname" %><br />
+        <%= f.text_field :nickname, autofocus: true, placeholder: "他の利用者に表示される名前です" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"Password" %>
+        <% if @minimum_password_length %>
+        <em>( <%= @minimum_password_length %>characters or more )</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "6文字以上" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :"パスワード(確認)" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="login-field">
+        <%= f.label :"Password(Confirmation)" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "6文字以上" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class:"btn-sm btn-success" %>
-  </div>
-<% end %>
+      <div class="login-actions">
+        <%= f.submit "Sign up", class:"btn-login" %>
+      </div>
+    <% end %>
 
-<%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+
+  </div>
+</div>

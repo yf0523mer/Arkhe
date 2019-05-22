@@ -53,8 +53,13 @@ html, body{
 
 .container {
     width: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0;
+}
+
+.body-container {
+    min-height:700px;
+    height:auto !important;
+    height:700px;
 }
 
 header ul {
