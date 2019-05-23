@@ -25,7 +25,7 @@ class PostsController < ApplicationController
         @comment = Comment.new
         @search = Post.ransack(params[:q])
         @results = @search.result
-        @places = @post.places.order("order ASC")
+        @places = @post.places
         #root()のメソッド呼び出し
         root()
       end
@@ -46,7 +46,8 @@ class PostsController < ApplicationController
   def edit
       @user = current_user
       @post = Post.find(params[:id])
-      @post.places.build
+      #root()のメソッド呼び出し
+      root()
       if current_user.id == @post.user_id || current_user.admin == true
       else
         redirect_to post_path(@post.id)
@@ -56,7 +57,6 @@ class PostsController < ApplicationController
 	def update
   		@post = Post.find(params[:id])
   		@post.update(post_params)
-      binding.pry
   		redirect_to post_path(@post.id)
 	end
 
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
       @user = User.find(@post.user_id)
       #
       @data = []
-      @post.places.each do |place|
+      @post.places.order(order:"ASC").each do |place|
         @address = place.address
         @data << Geocoder.coordinates(@address)
       end
@@ -91,7 +91,7 @@ class PostsController < ApplicationController
 
 	private
     def post_params
-        params.require(:post).permit(:title, :user_id, :text, :distance, :deleated,
+        params.require(:post).permit(:title, :user_id, :text, :deleated,
           images_images: [], places_attributes: [:address, :order, :_destroy])
     end
     def delete_post_params

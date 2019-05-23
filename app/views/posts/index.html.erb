@@ -1,18 +1,29 @@
 <div class="container">
-	<% provide(:title, 'All posts') %>
-	<%= render 'posts/list', results: @results, search: @search %>
+	<div class="user-index">
+		<% provide(:title, 'All posts') %>
+		<%= render 'posts/list', results: @results, search: @search %>
+	</div>
 </div>
-<div class="result-list">
-	<h3>Results</h3>
 
-	<% if @results.any? %>
- 		<% @results.where.not(user_id: @delete_user).each do |result| %>
-
-	 		<span><%= link_to post_path(result.id) do %>
-	              	<%= attachment_image_tag result.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '40x40', class:"post-image" %>
-	              <% end %>
-	        </span>
-	   		<p><%= link_to result.title, post_path(result.id), class:"post-title" %></p>
-	 	<% end %>
-	<% end %>
+<div class="result-post-box">
+	<table class="results">
+		<% if @results.any? %>
+	 		<% @results.where.not(user_id: @delete_user).each do |result| %>
+	 		<tr>
+	 			<%= link_to post_path(result.id) do %>
+		 		<td>
+		            <%= attachment_image_tag result.images.last, :image, :fill, 70, 70, fallback: "No_image.png",size: '70x70', class:"post-image" %></td>
+		   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p></td>
+		   	</tr>
+		   	<% end %>
+		 	<% end %>
+		<% end %>
+	</table>
 </div>
+
+
+<script>
+	$("tr[data-link]").click(function() {
+	  window.location = this.data("data-link")
+	})
+</script>

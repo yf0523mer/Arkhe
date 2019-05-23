@@ -14,12 +14,14 @@ class UsersController < ApplicationController
 
 	def index
 		@user = current_user
+		@posts = Post.where(user_id: @user.id, deleted: 'false').order(id: :desc).limit(3)
 		#論理削除済みのユーザを取ってくる
 		@delete_user = User.where(deleted: 'true')
 		@search = Post.ransack(params[:q])
 	    @results = @search.result.where(deleted: 'false')
 	    #フォローしているユーザの最新投稿３件を持ってくる
-	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(3)
+	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(6)
+	    #いいねランキングを作る
 	    favos = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
 	    @all_ranks = Post.where(id:favos,deleted:'false').limit(3)
 	end

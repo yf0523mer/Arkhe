@@ -4,35 +4,55 @@
 
   <div class="post-text">
     <div class="post-detail">
-      <span><%= link_to user_path(@post.user_id) do %>
-        <%= attachment_image_tag @post.user, :image, :fill, 200, 200, fallback: "No_image.png",size: '200x200', class:"user-image", style:"text-decoration:none;" %>
+        <div class="user-detail-box">
+          <span><%= link_to user_path(@post.user_id) do %>
+            <%= attachment_image_tag @post.user, :image, :fill, 150, 150, fallback: "No_image.png",size: '150x150', class:"user-image", style:"text-decoration:none;" %>
+            <% end %></span>
+            <span style="padding-left:20px; font-size:18px; top: 8px;"><%= link_to @post.user.nickname, user_path(@post.user_id) %></span>
+            <%= render 'relationships/list', users: @user %>
+        </div>
+      <div class="mybox">
+          <p style="font-size: 20px;"><span class="stripe"><%= @post.title %></span></p>
+          <p style="font-size: 18px;"><%= @post.text %></p>
+      </div>
+
+      <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 25px;">Photo</p>
+        <% @post.images.each_with_index do |image, idx| %>
+            <a  class="image-btn" data-toggle="modal" data-target="#modal-<%= idx + 1%>">
+              <%= attachment_image_tag image, :image, :fill, 200, 200, id:"motal-"+(idx+1).to_s %>
+            </a>
+
+            <div class="modal fade" id="modal-<%= idx + 1%>" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body" style="padding:0;">
+                    <%= attachment_image_tag image, :image, id:"js-show-popup" %>
+                  </div>
+                </div>
+              </div>
+            </div>
         <% end %>
-      </span>
-        <%= @post.title %>
-        <%= @post.text %>
-        <%= @post.distance %>
-        <% @post.images.each do |image| %>
-          <%= attachment_image_tag image, :image, :fill, 200, 200, class:"", size: '200x200' %>
-        <% end %><br>
-        <% @post.places.each do |p| %>
-          <%= p.address %>
-          <% if current_user == @user || current_user.admin == 'true' %>
-            <%= link_to "place delete", place_path(p.id), method: :delete, class:"destroy_p_#{p.id} btn-sm btn-danger", "data-confirm" => "場所を削除します。よろしいですか？" %>
-            <% else %>
-            <% end %><br>
-    <% end %>
+        </span><br>
+        <div class="routes-detail-box">
+            <table class="post-table">
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Routes</span></p>
+                <% @post.places.order(order:"ASC").each_with_index do |p, i| %>
+                <tr>
+                <th style="font-size: 18px;"><%= i + 1%>. <%= p.address %></th>
+                </tr>
+                <% end %>
+            </table>
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Total Distance</span></p>
+                <p id="distance" style="font-size: 18px;"></p>
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Travel Time(indication)</span></p>
+                <p id="time" style="font-size: 18px;"></p>
+        </div>
     </div>
   </div>
-  <div class="">
-    <p>Total Distance</p>
-    <p id="distance"></p>
-  </div>
-  <div class="">
-    <p>Travel Time(indication)</p>
-    <p id="time"></p>
-  </div>
 
-  <h3>Walking Routes</h3>
+
+<h3 style="margin-left: 60px;"><i class="fas fa-shoe-prints"></i> Walking Routes <i class="fas fa-shoe-prints"></i></h3>
+
     <div id="map"></div>
 
   <div class="favorite-zone">
@@ -63,26 +83,40 @@
     </li>
   </div>
 
-  <div>
-  <% @post.comments.each do |comment| %>
-      <span><%= comment.user.nickname %></span>
-      <span><%= comment.comment %></span>
-      <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-  <% end %>
-  </div>
-  <div>
-  <%= form_for [@post, @comment] do |f| %>
-      <div class="row">
-          <div class="col-sm-12">
-              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "Comments are here" %>
+      <div class="comment-list">
+      <% @post.comments.each do |comment| %>
+          <div class="comment-area" style="font-size: 15px;">
+              <span><%= comment.user.nickname %>:</span>
+              <span><%= comment.comment %></span>
+              <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span><br>
           </div>
+          <% end %>
       </div>
-          <%= f.submit "Post Comment", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-  <% end %>
-  </div>
-</div>
+      <div>
+    <%= form_for [@post, @comment] do |f| %>
+        <div class="row">
+              <div class="col-sm-12">
+                  <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "Comments are here" %>
+              </div>
+          </div>
+          <div class="new-post-box">
+            <div class="post-btn-zone">
+                <%= f.submit "Post Comment", class: 'post-btn' %>
+            </div>
+          </div>
+    <% end %>
+      </div>
+    </div>
 </div>
 
+
+<script>
+    $(function(){
+        $('.js-show-popup').on('click', function(){
+            $(this).show();
+        });
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   function initMap() {

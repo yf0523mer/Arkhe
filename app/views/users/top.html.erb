@@ -29,26 +29,66 @@
 
 <div class="top-text2">
 	<div class='text-box2'>
-	<div data-scroll >
-		<div data-scroll>
-			<p style="font-size: 30px;">How to use？<br><br></p>
-		</div>
-		<div data-scroll>
-			<p style="font-size: 30px;">お散歩に行った場所を投稿する。<br><br></p>
-		</div>
-		<div data-scroll>
-			<p style="font-size: 30px;">行ってみたい場所を検索してみる。<br><br></p>
-		</div>
-		<div data-scroll>
-			<p style="font-size: 30px;">お気に入りのユーザをフォローして、散歩コースを見てみる。<br><br></p>
-		</div>
-		<div data-scroll>
-			<p style="font-size: 30px;">そんな感じのサイトです。</p>
+		<div data-scroll >
+			<div data-scroll>
+				<p style="font-size: 35px;">How to use<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">お散歩に行った場所を投稿する。<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">行ってみたい場所を検索して、散歩コースを見てみる。<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">お気に入りのユーザをフォローして、散歩の投稿を見てみる。<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">そんな感じのサイトです。</p>
+			</div>
 		</div>
 	</div>
 </div>
+
+<div class="top-text3">
+	<div class='text-box3'>
+		<div data-scroll >
+			<div data-scroll>
+				<p style="font-size: 35px;">Contact Us<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">ご不明な点やご質問、ご要望などございましたら<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">下記のアドレスまでご連絡お願い致します。<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">fuku0118yf★gmail.com<br><br></p>
+			</div>
+			<div data-scroll>
+				<p style="font-size: 30px;">★の部分を@に置き換えて下さい。</p>
+			</div>
+		</div>
+</div>
+    <span id="back">
+      <a href="#">
+        <img src="/assets/arrow.png" alt="">
+      </a>
+    </span>
 </div>
 
+
+<script>
+
+$(function() {
+  $('#back a').on('click',function(){
+    $('body, html').animate({
+      scrollTop:0
+    }, 400);
+      return false;
+  });
+});
+
+</script>
 
 <script src="/assets/ScrollTrigger.min.js"></script>
 <script>

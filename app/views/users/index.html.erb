@@ -10,7 +10,8 @@
 
 
 <div class="container">
-	<div class="user-box col-sm-3" style="text-align: center;">
+	<div class="col-sm-4">
+	<div class="user-box" style="text-align: center;">
 		<%= attachment_image_tag @user, :image, :fill, 200, 200, class:"image-to-circle user-image", fallback: "No_image.png",size: '200x200' %><br>
 		<p><%= @user.nickname %></p>
 		<p><%= @user.introduction %></p>
@@ -30,10 +31,22 @@
 	    </a>
 	  </div>
 	</div>
+	<div class="user-box ranking-box">
+		<div class="following-post-title"><i class="fas fa-crown"></i> Favorite Ranking <i class="fas fa-crown"></i></div>
+	      <% @all_ranks.each do |rank| %>
+	        <li class=""><%= link_to post_path(rank.id) do %>
+	                      <%= attachment_image_tag rank.images.last, :image, :fill, 100, 100, fallback: "No_image.png",size: '100x100', class:"ranking-image" %>
+	                    <% end %>
+	          <%= link_to rank.title, post_path(rank.id), class:"ranking-post" %></li>
+	      <% end %>
+	</div>
+</div>
 
-	<div class="col-sm-5">
-		<%= render 'posts/list', results: @results, search: @search %>
-		<div class="following-post-title">Following New Post</div>
+<div class="col-sm-6">
+	<%= render 'posts/list', results: @results, search: @search %>
+</div>
+	<div class="col-sm-7">
+		<div class="index-post-box">
 		<div class="post-list-nav">
 			<% @feed_items.where.not(user_id: @delete_user).each do |post| %>
 				<li class="post-nav-item"><%= link_to post_path(post.id) do %>
@@ -42,17 +55,22 @@
 			    <%= link_to post.title, post_path(post.id), class:"post-title" %></li>
 			<% end %>
 		</div>
+		</div>
 	</div>
+	<div class="col-sm-7">
+		<div class="index-your-box">
+		<div class="post-list-nav">
+			<% @posts.each do |ypost| %>
+				<li class="post-nav-item"><%= link_to post_path(ypost.id) do %>
+			              	<%= attachment_image_tag ypost.images.last, :image, :fill, 150, 150, fallback: "No_image.png",size: '150x150', class:"post-image" %>
+			              <% end %>
+			    <%= link_to ypost.title, post_path(ypost.id), class:"post-title" %></li>
+			<% end %>
+		</div>
+		</div>
+	</div>
+</div>
 
-	<div class="user-box ranking-box col-sm-3">
-		<div class="following-post-title">Favorite Ranking</div>
-	      <% @all_ranks.each do |rank| %>
-	        <li class=""><%= link_to post_path(rank.id) do %>
-	                      <%= attachment_image_tag rank.images.last, :image, :fill, 100, 100, fallback: "No_image.png",size: '100x100', class:"ranking-image" %>
-	                    <% end %>
-	          <%= link_to rank.title, post_path(rank.id), class:"ranking-post" %></li>
-	      <% end %>
-	</div>
 </div>
 
 

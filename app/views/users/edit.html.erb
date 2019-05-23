@@ -1,19 +1,19 @@
 <div class="container">
   <div class="user-edit-box">
   	<%= form_for @user, url: user_path do |f| %>
-  		<h4>苗字</h4>
+  		<h4>Last name</h4>
   			<%= f.text_field :last_name, autofocus: true, id:"inputLastname", placeholder:"苗字"%>
-  		<h4>苗字かな</h4>
+  		<h4>Last name(kana)</h4>
   			<%= f.text_field :last_name_kana, autofocus: true, id:"inputLastnamekana", placeholder:"苗字かな"%>
-  		<h4>名前</h4>
+  		<h4>First name</h4>
   			<%= f.text_field :first_name, autofocus: true, id:"inputFirstname", placeholder:"名前"%>
-  		<h4>名前かな</h4>
+  		<h4>First name(kana)</h4>
   			<%= f.text_field :first_name_kana, autofocus: true, id:"inputFirstname", placeholder:"名前かな"%>
-  		<h4>ニックネーム</h4>
+  		<h4>Nickname</h4>
   			<%= f.text_field :nickname, autofocus: true, id:"inputNickname", placeholder:"ニックネーム"%>
   		<h4>E-mail</h4>
   			<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder:"E-mail"%>
-  		<h4>ユーザ画像</h4>
+  		<h4>User Image</h4>
   	        <%= f.attachment_field :image, class: "image", type:'file' %>
   		<br>
   		<div class="preview"></div>

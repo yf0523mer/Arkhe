@@ -1,7 +1,7 @@
-<div class='nested-fields' id="placef">
+<div class='nested-fields' id="placef" style="padding: 5px;">
   <%#= f.inputs do %>
-    <%= f.text_field :order %>
-    <%= f.text_field :address, id:"address" %>
-    <%= link_to_remove_association "remove task", f, id:"removeb" %>
+    <%= f.text_field :order, placeholder:"order" %>
+    <%= f.text_field :address, id:"address", placeholder:"address" %>
+    <%= link_to_remove_association "remove place", f, id:"removeb", class:"post-remove-btn" %>
   <%# end %>
 </div>

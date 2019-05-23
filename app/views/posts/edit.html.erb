@@ -1,54 +1,113 @@
 <div class="post-box">
 <div class="container">
-<h2>Post Edit</h2>
-  <h2>Gmap</h2>
-  <!-- form_withはデフォルトでremote: trueの挙動になります -->
-  <%= form_with url: map_request_path, method: :get do |f|%>
-    <%= f.text_field :address %>
-    <%= f.submit '地図表示' %>
-  <% end %>
+    <div class="new-post-box">
+        <h2>Post Edit</h2>
+        <h2>Gmap</h2>
+    </div>
 
-  <div id="map">
-  </div>
+  <div id="map"></div>
 
 
-  <style>
-  #map{
-    height: 400px;
-  }
-  </style>
 
-  <%= form_for @post, url: post_path do |f| %>
-    <h3>Where You went</h3>
-      <div id='places'>
-          <%= f.fields_for :places do |place| %>
-            <%= render 'place_fields', :f => place %>
-          <% end %>
-          <div class='links'>
-            <%= link_to_add_association 'add place', f, :places %>
-        </div>
-      </div>
-
-    <b>Title</b>
-      <%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"タイトル"%>
-    <b>Text</b>
-      <%= f.text_field :text, autofocus: true, id:"inputLastnamekana", placeholder:"本文"%>
-    <h3>写真投稿</h3>
-        <%= f.attachment_field :images_images, multiple: true %>
-    <%= f.submit 'Post Edit',class: 'btn btn-default col-lg-2' %>
-  <% end %>
+<div class="new-post-box clip-box-a">
+    <table class="post-table">
+        <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Routes</p>
+            <% @post.places.order(order:"ASC").each do |p| %>
+                <tr>
+                  <th><%= p.address %></th>
+                  <% if current_user == @user || current_user.admin == 'true' %>
+                    <th><%= link_to "place delete", place_path(p.id), method: :delete, class:"destroy_p_#{p.id} place-remove-btn", "data-confirm" => "場所を削除します。よろしいですか？" %></th>
+                    <% else %>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
 </div>
+
+<div class="new-post-box clip-box-a">
+    <table class="post-table">
+        <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Images</p>
+            <% @post.images.each do |image| %>
+                <tr>
+                  <th><%= attachment_image_tag image, :image, :fill, 200, 200 %></th>
+                  <% if current_user == @user || current_user.admin == 'true' %>
+                    <th><%= link_to "image delete", image_path(image.id), method: :delete, class:"destroy_image_#{image.id} place-remove-btn", "data-confirm" => "画像を削除します。よろしいですか？" %></th>
+                    <% else %>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+    <div style="width: 80%; margin: auto;">
+        <div id="preview_result">Image preview</div>
+    </div>
+
+<div class="new-post-box clip-box-a">
+    <%= form_for @post, url: post_path do |f| %>
+        <h3>Where You went</h3>
+              <div id='places'>
+                <%= f.fields_for :places do |place| %>
+                <%= render 'place_fields', :f => place %>
+                <% end %>
+                <div class='links'>
+                    <%= link_to_add_association 'add place', f, :places, class:"post-add-btn" %>
+                </div>
+              </div>
+
+            <b>Title</b><br>
+              <%= f.text_field :title, autofocus: true, id:"inputLastname", placeholder:"Title" %><br>
+            <b>Text</b><br>
+              <%= f.text_area :text, autofocus: true, id:"inputLastnamekana", placeholder:"Text", :size=>"50x5" %>
+            <h3>Image Post</h3>
+                <%= f.attachment_field :images_images, multiple: true, class:"image", type:"file", id:"input_file", onchange:"preview_file(this.id);"%>
+                <div class="post-btn-zone">
+                    <%= f.submit 'Post Edit', class: 'post-btn' %>
+                </div>
+          <% end %>
+        </div>
+    </div>
 </div>
 
 
 <script>
-  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+// プレビュー関数(引数 ⇒ inputタグのid)
+function preview_file(id){
 
-  function initMap(){
-    mapInstance = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.658, lng: 139.7},
-    zoom: 14,
-    styles: [{
+    // 対象要素を取得
+    var target_element = document.getElementById(id);
+
+    // 結果コードを格納する変数
+    var result_code = '';
+
+    // アップした画像の数だけ処理
+    for (var i = 0; i < document.getElementById(id).files.length; i++){
+
+        // 画像のURLを取得
+        var img_url = window.URL.createObjectURL(document.getElementById(id).files[i]);
+
+        // コードを更新
+        result_code += '<img src="' + img_url + '" alt="プレビュー">';
+
+    }
+
+    // プレビューを出力
+    document.getElementById('preview_result').innerHTML = result_code;
+
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+　let mapInstance
+  function initMap() {
+    var bounds = new google.maps.LatLngBounds();
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: { lat: gon.location[0], lng: gon.location[1] },
+      styles: [
+        {
             "featureType": "administrative",
             "elementType": "labels.text.fill",
             "stylers": [
@@ -280,12 +339,81 @@
             ]
         }
     ]
+
+
     });
+    for(var i = 0; i < gon.locations.length; i++){
+      marker = new google.maps.Marker({
+        position: { lat: gon.locations[i][0], lng: gon.locations[i][1] },
+        // title: gon.locations[i].name,
+      });
+    }
+    //ルート表示
+        var rendererOptions = {
+            suppressMarkers : false,
+            map: map,
+        }
+        var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        var directionsService = new google.maps.DirectionsService();
+        var points ={};
+        var origin; // 開始地点
+        var destination; // 終了地点
+        var waypoints = []; // 経由地点
+
+            //origin, destination, waypointsを設定する
+            for (var i = 0; i < gon.locations.length; i++) {
+                points = {lat : gon.locations[i][0], lng : gon.locations[i][1]};
+                // points[i] = new google.maps.LatLng(gon.locations[i][0],gon.locations[i][1]);
+                if (i == 0){
+                    origin = points;
+                } else if (i == gon.locations.length-1){
+                    destination = points;
+                } else {
+                    var waylocations = new google.maps.LatLng(points.lat, points.lng);
+                    waypoints.push( {location: waylocations, stopover: true} );
+                }
+            }
+
+            // リクエスト作成
+            var request = {
+                origin:      origin,
+                destination: destination,
+                waypoints: waypoints,
+                travelMode:  google.maps.TravelMode.WALKING,
+                optimizeWaypoints: false
+            };
+
+            // ルートサービスのリクエスト
+            directionsService.route(request, function(response, status) {
+
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // 結果を表示する
+                    directionsDisplay.setDirections(response);
+                }
+                var data = response.routes[0].legs;
+                var dis = 0;
+                var sec = 0;
+                for (var i = 0; i < data.length; i++) {
+                    sec += data[i].duration.value;
+                    dis += data[i].distance.value;
+                }
+                var d = document.createElement("span");
+                d.setAttribute("id", "distance");
+                var dresult = Math.round(dis*100/1000) / 100;
+                d.innerHTML     = dresult + "km";
+                document.getElementById("distance").appendChild(d);
+
+                var t = document.createElement("span");
+                t.setAttribute("id", "time");
+                var sresult = Math.round(sec*100/3600) / 100;
+                t.innerHTML     = sresult  + "時間";
+                document.getElementById("time").appendChild(t);
+            });
+
+      bounds.extend (marker.position);
+      map.fitBounds (bounds);
+    //ルート表示
   }
 
-  // $("#removeb").on("click", function(){
-  //   var target = $(event.target);
-  //   target.remove();
-  // });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>

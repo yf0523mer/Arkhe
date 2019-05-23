@@ -1,6 +1,7 @@
 <div class="container">
 
-<div class="user-action-zone user-box col-sm-3">
+<div class="col-sm-3">
+<div class="user-action-zone">
   <%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %><br>
   <% if @users.id == current_user.id || current_user.admin == true %>
   	<%= @users.last_name %>
@@ -25,17 +26,19 @@
     </a>
   </div>
 
-<%= render 'relationships/list', users: @users %>
 
-	<% if @users.id == current_user.id || current_user.admin == true %>
-		<%= link_to "User Edit", edit_user_path(@users.id), class:"edit_user_#{@users.id} user-edit-btn", style:"text-decoration:none; margin-bottom:5px;" %><br>
-		<%= link_to "Quit", user_path(@users.id, :user => {:deleted => 'true'}), method: :delete, class:"destroy_user_#{@users.id} quit-btn", style:"text-decoration:none;", "data-confirm" => "Arkheを退会します。よろしいですか？" %>
-	<% end %>
+  <%= render 'relationships/list', users: @users %>
+
+  	<% if @users.id == current_user.id || current_user.admin == true %>
+  		<%= link_to "User Edit", edit_user_path(@users.id), class:"edit_user_#{@users.id} user-edit-btn", style:"text-decoration:none; margin-bottom:5px;" %><br>
+  		<%= link_to "Quit", user_path(@users.id, :user => {:deleted => 'true'}), method: :delete, class:"destroy_user_#{@users.id} quit-btn", style:"text-decoration:none;", "data-confirm" => "Arkheを退会します。よろしいですか？" %>
+  	<% end %>
+  </div>
 </div>
 
   <%= render 'posts/list', results: @results, search: @search %>
 <div class="col-sm-8">
-	<h3 style="font-family: 'Comic Sans MS',sans-serif;">Your Posts List</h3>
+  <div class="your-post-box">
   <div class="post-action-zone">
 		<% @posts.each do |post| %>
       <span class="post-index"><%= link_to post_path(post.id) do %>
@@ -49,6 +52,7 @@
         <% end %></li>
 		<% end %>
   </div>
+</div>
 </div>
 </div>
 
