@@ -1,16 +1,16 @@
-<% provide(:first_name || :last_name, 'Users') %>
-<div class="search-zone" style="float:left">
-	<%= search_form_for @search, url: management_path, method: :get do |f| %>
-	  <div class="form-group">
-	    <%= f.label :first_name_cont, "Search" %>
-	    <%= f.text_field :first_name_or_last_name_or_nickname_cont, class: "form-control" %>
-	  </div>
-	  <div class="search-btn-zone">
-	  	<%= f.submit "Let's Search", class:"search-btn" %>
-	  </div>
-	</div>
-<% end %>
 <div class="user-index">
+	<% provide(:first_name || :last_name, 'Users') %>
+	<div class="search-zone" style="float:left">
+		<%= search_form_for @search, url: management_path, method: :get do |f| %>
+		  <div class="form-group">
+		    <%= f.label :first_name_cont, "Search" %>
+		    <%= f.text_field :first_name_or_last_name_or_nickname_cont, class: "form-control" %>
+		  </div>
+		  <div class="search-btn-zone">
+		  	<%= f.submit "Let's Search", class:"search-btn" %>
+		  </div>
+		</div>
+	<% end %>
 	<table class="clip-box-b">
 		<% @results.each do |user| %>
 			<tr>

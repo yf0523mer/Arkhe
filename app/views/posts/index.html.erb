@@ -1,24 +1,27 @@
 <div class="container">
-	<div class="">
+	<div class="user-index">
 		<% provide(:title, 'All posts') %>
 		<%= render 'posts/list', results: @results, search: @search %>
 	</div>
 </div>
+
 <div class="result-post-box">
-	<table>
-	<% if @results.any? %>
- 		<% @results.where.not(user_id: @delete_user).each do |result| %>
- 		<%= link_to post_path(result.id) do %>
- 		<tr>
-	 		<td>
-	            <%= attachment_image_tag result.images.last, :image, :fill, 60, 60, fallback: "No_image.png",size: '60x60', class:"post-image" %>
-	   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p></td>
-	   	</tr>
-	   	<% end %>
-	 	<% end %>
-	<% end %>
+	<table class="results">
+		<% if @results.any? %>
+	 		<% @results.where.not(user_id: @delete_user).each do |result| %>
+	 		<tr>
+	 			<%= link_to post_path(result.id) do %>
+		 		<td>
+		            <%= attachment_image_tag result.images.last, :image, :fill, 70, 70, fallback: "No_image.png",size: '70x70', class:"post-image" %></td>
+		   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p></td>
+		   	</tr>
+		   	<% end %>
+		 	<% end %>
+		<% end %>
 	</table>
 </div>
+
+
 <script>
 	$("tr[data-link]").click(function() {
 	  window.location = this.data("data-link")

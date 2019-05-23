@@ -35,16 +35,16 @@
         </span><br>
         <div class="routes-detail-box">
             <table class="post-table">
-                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Routes</p>
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Routes</span></p>
                 <% @post.places.order(order:"ASC").each_with_index do |p, i| %>
                 <tr>
                 <th style="font-size: 18px;"><%= i + 1%>. <%= p.address %></th>
                 </tr>
                 <% end %>
             </table>
-                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Total Distance</p>
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Total Distance</span></p>
                 <p id="distance" style="font-size: 18px;"></p>
-                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;">Travel Time(indication)</p>
+                <p style="font-family: 'Comic Sans MS',sans-serif; font-size: 20px;"><span class="stripe">Travel Time(indication)</span></p>
                 <p id="time" style="font-size: 18px;"></p>
         </div>
     </div>
