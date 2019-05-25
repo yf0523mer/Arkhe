@@ -37,22 +37,43 @@
 </div>
 
   <%= render 'posts/list', results: @results, search: @search %>
-<div class="col-sm-8">
-  <div class="your-post-box">
-  <div class="post-action-zone">
-		<% @posts.each do |post| %>
-      <span class="post-index"><%= link_to post_path(post.id) do %>
-        <li class="your-nav-item"><%= attachment_image_tag post.images.last, :image, :fill, 40, 40, fallback: "No_image.png",size: '60x60', class:"post-image" %>
-        <% end %>
-      </span>
-			<%=link_to post.title, post_path(post.id), class:"post-title" %>
-      <% if @user == current_user %>
-            <%= link_to "Post Edit", edit_post_path(post.id), class:"post-edit-btn", style:"text-decoration:none;" %>
-            <%= link_to "Post Delete", post_path(post.id, :post => {:deleted => 'true'}), method: :delete, class:"destroy_post#{post.id} post-delete-btn", style:"text-decoration:none;", "data-confirm" => "投稿を削除します。よろしいですか？" %>
-        <% end %></li>
-		<% end %>
+  <div class="col-sm-8">
+    <div class="your-post-box">
+    <div class="post-action-zone">
+  		<% @posts.each do |post| %>
+        <span class="post-index"><%= link_to post_path(post.id) do %>
+          <li class="your-nav-item"><%= attachment_image_tag post.images.last, :image, :fill, 80, 80, fallback: "No_image.png",size: '80x80', class:"post-image" %>
+          <% end %>
+        </span>
+  			<%=link_to post.title, post_path(post.id), class:"post-title" %>
+        <% if @user == current_user %>
+              <%= link_to "Post Edit", edit_post_path(post.id), class:"post-edit-btn", style:"text-decoration:none;" %>
+              <%= link_to "Post Delete", post_path(post.id, :post => {:deleted => 'true'}), method: :delete, class:"destroy_post#{post.id} post-delete-btn", style:"text-decoration:none;", "data-confirm" => "投稿を削除します。よろしいですか？" %>
+          <% end %></li>
+  		<% end %>
+    </div>
   </div>
-</div>
-</div>
+  </div>
+
+<% if @users.id == current_user.id || current_user.admin == true %>
+  <div class="col-sm-8">
+    <div class="fav-post-box">
+      <div class="fav-list-nav">
+        <ul>
+          <% @user.favorite_posts.each do |fpost| %>
+            <li class="your-nav-item">
+              <span class="post-index"><%= link_to post_path(fpost.id) do %>
+            <%= attachment_image_tag fpost.images.last, :image, :fill, 110, 110, fallback: "No_image.png",size: '110x110', class:"post-image" %></span>
+          <% end %>
+        <%=link_to fpost.title, post_path(fpost.id), class:"post-title" %></li>
+      <% end %>
+      </span>
+    </ul>
+    </div>
+  </div>
+  </div>
+  <% else %>
+<% end %>
+
 </div>
 

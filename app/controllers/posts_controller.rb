@@ -39,6 +39,7 @@ class PostsController < ApplicationController
       else
           @post = Post.new
           @image = Image.new
+          flash.now[:error] = "Any error has occurred. Please check your post."
           render :new
       end
   end

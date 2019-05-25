@@ -1,6 +1,9 @@
 <div class="post-box">
     <div class="new-post-box">
     	<h2>New Post</h2>
+        <% if flash[:error] %>
+          <p id="error"><%= flash[:error] %></p>
+        <% end %>
     	<h2 style="font-family: 'Comic Sans MS',sans-serif;">Gmap</h2>
 	<!-- form_withはデフォルトでremote: trueの挙動になります -->
     	<%= form_with url: map_request_path, method: :get do |f|%>
@@ -310,4 +313,4 @@ function preview_file(id){
   }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBESe-XiGnJZvB4UDmGMiavJ6C8sU4MMaw&callback=initMap" async defer></script>

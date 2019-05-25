@@ -17,6 +17,13 @@ class User < ApplicationRecord
    has_many :following, through: :active_relationships, source: :followed
    has_many :followers, through: :passive_relationships, source: :follower
 
+   validates :last_name, presence: true
+   validates :last_name_kana, presence: true
+   validates :first_name, presence: true
+   validates :first_name_kana, presence: true
+   validates :nickname, presence: true
+   has_many  :favorite_posts, through: :favorites, source: :post
+
   def active_for_authentication?
     super && self.deleted == false
   end

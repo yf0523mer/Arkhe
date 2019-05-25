@@ -17,6 +17,10 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ #error {
+  color: red;
+ }
+
  #map {
     height: 600px;
     width: 80%;
