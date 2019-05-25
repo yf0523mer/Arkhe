@@ -1,13 +1,14 @@
 <div class="post-box">
 <div class="container">
     <div class="new-post-box">
+        <% if flash[:error] %>
+          <p id="error"><%= flash[:error] %></p>
+        <% end %>
         <h2>Post Edit</h2>
         <h2>Gmap</h2>
     </div>
 
   <div id="map"></div>
-
-
 
 <div class="new-post-box clip-box-a">
     <table class="post-table">

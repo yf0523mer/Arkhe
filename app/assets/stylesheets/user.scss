@@ -82,6 +82,12 @@
   padding: 15px 0;
 }
 
+.user-index table a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .follow-title h3 {
   font-family: 'Comic Sans MS',sans-serif;
   width: 70%;
@@ -297,6 +303,8 @@ div .top-title {
   list-style: none;
   font-style: normal;
   margin:10px;
+  margin-top:20px;
+  margin-bottom:100px;
   text-align: center;
   vertical-align: middle;
   width: 95%;
@@ -585,6 +593,27 @@ div .top-title {
     font-size: 14px;
 }
 
+.fpost-list-nav {
+    display: table;
+    width: 100%;
+    background: #FFF;
+    padding: 15px;
+}
+
+.fpost-list-nav li{
+    margin: 8px;
+    float: left;
+    list-style: none;
+}
+
+.fpost-list-nav a {
+    display: block;
+    padding: 8px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
 .following-post-title {
   font-family: 'Comic Sans MS',sans-serif;
   font-size: 25px;
@@ -606,6 +635,21 @@ div .top-title {
   list-style-type: none;
   padding: 20px;
   text-align: left;
+  margin: 10px;
+}
+
+.ranking-box li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ranking-box li a:active {
+  text-decoration: none;
+}
+
+.ranking-box li:hover {
+  background-color: #FFFF99;
 }
 
 .ranking-post {
@@ -632,7 +676,7 @@ div .top-title {
  border-left: 2px dotted rgba(255,255,255,0.9);
  border-right: 2px dotted rgba(255,255,255,0.9);
  box-shadow: 0 0 5px rgba(255,255,255,0.5);
- content: 'Following New Post';
+ content: 'Following New Posts';
  display: block;
  margin: 0 0 10px 0;
  padding: 5px 20px;
@@ -708,7 +752,7 @@ div .top-title {
  border-left: 2px dotted rgba(255,255,255,0.9);
  border-right: 2px dotted rgba(255,255,255,0.9);
  box-shadow: 0 0 5px rgba(255,255,255,0.5);
- content: 'Your Post List';
+ content: 'User Posts List';
  display: block;
  margin: 0 0 10px 0;
  padding: 5px 20px;
@@ -732,4 +776,62 @@ div .top-title {
 
 .fa-crown:before {
   color: #fcc800;
+}
+
+.fav-post-box{
+ background-color: #f9f6e5;  /* 背景色 */
+ border: 1px solid #ccc; /* 線の太さ・種類・色 */
+ box-shadow:1px 1px 6px 0px #ccc;
+ -moz-box-shadow:1px 1px 6px 0px #ccc;
+ -webkit-box-shadow:1px 1px 6px 0px #ccc;
+ -o-box-shadow:1px 1px 6px 0px #ccc;
+ margin: 20px 5px; /* 外側の余白 上下・左右 */
+ padding: 30px 20px 20px 20px; /* 内側の余白 上・右・下・左 */
+ position: relative;
+ z-index: 0;
+}
+.fav-post-box:after{
+ background-color: #d04f97; /* マステ部分の色1 */
+ background-image: linear-gradient(45deg, #ff61b8 25%, transparent 25%, transparent 75%, #ff61b8 75%, #ff61b8), linear-gradient(45deg, #ff61b8 25%, transparent 25%, transparent 75%, #ff61b8 75%, #ff61b8); /* マステ部分の色2 */
+ background-position: 0 0, 12px 12px;
+ background-size: 24px 24px;
+ border-left: 2px dotted rgba(255,255,255,0.9);
+ border-right: 2px dotted rgba(255,255,255,0.9);
+ box-shadow: 0 0 5px rgba(255,255,255,0.5);
+ content: 'Your Favorite Posts';
+ display: block;
+ margin: 0 0 10px 0;
+ padding: 5px 20px;
+ color: #fff;  /* マステ部分文字色 */
+ text-align: center;
+ position: absolute;
+ top: -20px;
+ left: 35%;
+ transform: rotate(-3deg);
+ -moz-transform: rotate(-3deg);
+ -webkit-transform: rotate(-3deg);
+ -o-transform: rotate(-3deg);
+ font-family: 'Comic Sans MS',sans-serif;
+ font-size: 20px;
+ width: 250px;
+}
+
+.fav-list-nav {
+    display: table;
+    width: 100%;
+    background: none;
+}
+
+.fav-list-nav li{
+    margin: 8px;
+    float: left;
+    list-style: none;
+}
+
+.fav-list-nav a {
+    display: block;
+    padding: 4px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
 }

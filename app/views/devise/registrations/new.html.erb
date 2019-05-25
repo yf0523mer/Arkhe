@@ -33,7 +33,8 @@
 
       <div class="login-field">
         <%= f.label :"Nickname" %><br />
-        <%= f.text_field :nickname, autofocus: true, placeholder: "他の利用者に表示される名前です" %>
+        <%= f.label :"他の利用者に表示される名前です", style:"font-weight: normal;" %><br />
+        <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム" %>
       </div>
 
       <div class="login-field">

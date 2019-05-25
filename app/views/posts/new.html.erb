@@ -1,6 +1,9 @@
 <div class="post-box">
     <div class="new-post-box">
     	<h2>New Post</h2>
+        <% if flash[:error] %>
+          <p id="error"><%= flash[:error] %></p>
+        <% end %>
     	<h2 style="font-family: 'Comic Sans MS',sans-serif;">Gmap</h2>
 	<!-- form_withはデフォルトでremote: trueの挙動になります -->
     	<%= form_with url: map_request_path, method: :get do |f|%>

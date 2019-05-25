@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 		@search = Post.ransack(params[:q])
 	    @results = @search.result.where(deleted: 'false')
 	    #フォローしているユーザの最新投稿３件を持ってくる
-	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(6)
+	    @feed_items = current_user.feed.paginate(page: params[:page]).where(deleted: 'false').order(id: :desc).limit(8)
 	    #いいねランキングを作る
 	    favos = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
 	    @all_ranks = Post.where(id:favos,deleted:'false').limit(3)
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 		    @search = Post.ransack(params[:q])
 		    @results = @search.result.where(deleted: 'false')
 		    @posts = @users.posts.where(deleted: 'false')
+		    @favorites = Favorite.where(user_id: current_user.id)
 		end
 	end
 
