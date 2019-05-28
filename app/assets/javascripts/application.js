@@ -18,6 +18,7 @@
 //= require ScrollTrigger
 //= require cocoon
 //= require_tree .
+//= require skippr.min
 
 $(document).on('turbolinks:load',function () {
   $("#theTarget").skippr({
