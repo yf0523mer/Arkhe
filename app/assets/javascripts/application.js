@@ -16,8 +16,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require ScrollTrigger
-//= require_tree .
 //= require cocoon
+//= require_tree .
 
 $(document).on('turbolinks:load',function () {
   $("#theTarget").skippr({
