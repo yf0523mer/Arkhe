@@ -17,7 +17,6 @@
 //= require bootstrap-sprockets
 //= require ScrollTrigger
 //= require cocoon
-//= require skippr
 //= require_tree .
 
 
