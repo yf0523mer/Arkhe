@@ -35,7 +35,7 @@
 		<div class="following-post-title"><i class="fas fa-crown"></i> Favorite Ranking <i class="fas fa-crown"></i></div>
 	      <% @all_ranks.each do |rank| %>
 	        <li class=""><%= link_to post_path(rank.id) do %>
-	                      <%= attachment_image_tag rank.images.last, :image, :fill, 100, 100, fallback: "No_image.png",size: '100x100', class:"ranking-image" %>
+	                      <%= attachment_image_tag rank.images.last, :image, fallback: "No_image.png",size: '100x100', class:"ranking-image" %>
 	          <span style="padding-left: 15px;"><%= rank.title %><% end %></span></li>
 	      <% end %>
 	</div>
@@ -64,7 +64,7 @@
 		<div class="post-list-nav">
 			<% @posts.each do |ypost| %>
 				<li class="post-nav-item"><%= link_to post_path(ypost.id) do %>
-			    	<%= attachment_image_tag ypost.images.last, :image, :fill, 150, 150, fallback: "No_image.png",size: '150x150', class:"post-image" %>
+			    	<%= attachment_image_tag ypost.images.last, :image, fallback: "No_image.png",size: '150x150', class:"post-image" %>
 			        <% end %>
 			    	<%= link_to ypost.title, post_path(ypost.id), class:"post-title" %>
 			    </li>

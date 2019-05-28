@@ -12,7 +12,7 @@
 	 		<tr>
 	 			<%= link_to post_path(result.id) do %>
 		 		<td>
-		            <%= attachment_image_tag result.images.last, :image, :fill, 70, 70, fallback: "No_image.png",size: '70x70', class:"post-image" %></td>
+		            <%= attachment_image_tag result.images.last, :image, fallback: "No_image.png",size: '70x70', class:"post-image" %></td>
 		   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p></td>
 		   	</tr>
 		   	<% end %>
