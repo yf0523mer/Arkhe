@@ -17,7 +17,7 @@
 //= require bootstrap-sprockets
 //= require ScrollTrigger
 //= require cocoon
-//= require_tree .
+
 
 
 $(document).on('turbolinks:load',function () {
