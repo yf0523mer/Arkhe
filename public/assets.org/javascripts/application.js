@@ -13,13 +13,12 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require ScrollTrigger
 //= require_tree .
 //= require cocoon
 
-$(document).on('turbolinks:load',function () {
+$(document).on(function () {
   $("#theTarget").skippr({
       // スライドショーの変化 ("fade" or "slide")
       transition : 'fade',
