@@ -50,7 +50,7 @@
 				<ul>
 					<% @feed_items.where.not(user_id: @delete_user).each do |post| %>
 						<li><%= link_to post_path(post.id) do %>
-						    <%= attachment_image_tag post.images.last, :image, :fill, 150, 150, fallback: "No_image.png",size: '150x150', class:"post-image" %>
+						    <%= attachment_image_tag post.images.last, :image, fallback: "No_image.png",size: '150x150', class:"post-image" %>
 						            <% end %>
 						    <%= link_to post.title, post_path(post.id), class:"post-title" %>
 						</li>
