@@ -13,7 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require ScrollTrigger
 //= require cocoon
@@ -22,7 +22,7 @@
 
 
 
-$(document).on(function () {
+// $(document).on('turbolinks:load',function () {
   $("#theTarget").skippr({
       // スライドショーの変化 ("fade" or "slide")
       transition : 'fade',
@@ -45,6 +45,6 @@ $(document).on(function () {
       // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
       hidePrevious : false
   });
-});
+// });
 
 

@@ -78,7 +78,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="/assets/skippr.min.js" type="text/javascript" charset="utf-8" async defer></script>
 <script>
- $(document).on(function () {
+
+// $(document).on('turbolinks:load',function () {
   $("#theTarget").skippr({
       // スライドショーの変化 ("fade" or "slide")
       transition : 'fade',
@@ -101,6 +102,6 @@
       // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
       hidePrevious : false
   });
-});
+// });
 </script>
 

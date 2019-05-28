@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
   def new
   		@post = Post.new
+      p  = ENV["GMAP"]
       #@postに関連づけたimages,placesをbuild
   		@post.images.build
       @post.places.build
