@@ -32,6 +32,9 @@
                   <ul class="header-page">
                       <% if user_signed_in? && current_user.admin? %>
                           <li class="header-right">
+                            <%= link_to "About", root_path, class="fas fa-book-open" %>
+                          </li>
+                          <li class="header-right">
                             <%= link_to "New Post", new_post_path, class: "header-link fas fa-walking" %>
                           </li>
                           <li class="header-right">
@@ -44,6 +47,9 @@
                               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "header-link fas fa-sign-out-alt" %>
                           </li>
                       <% elsif user_signed_in? && !current_user.admin? %>
+                          <li class="header-right">
+                            <%= link_to "About", root_path, class="fas fa-book-open" %>
+                          </li>
                           <li class="header-right">
                             <%= link_to "New Post", new_post_path, class: "header-link fas fa-walking" %>
                           </li>
