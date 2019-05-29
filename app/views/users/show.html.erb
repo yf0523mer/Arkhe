@@ -2,7 +2,7 @@
 
 <div class="col-sm-3">
 <div class="user-action-zone">
-  <%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size: '200x200' %><br>
+  <%= attachment_image_tag @users, :image, :fill, 200, 200, class:"image-to-circle", fallback: "No_image.png",size:'200x200' %><br>
   <% if @users.id == current_user.id || current_user.admin == true %>
   	<%= @users.last_name %>
   	<%= @users.first_name %><br>
@@ -42,7 +42,7 @@
     <div class="post-action-zone">
   		<% @posts.each do |post| %>
         <span class="post-index"><%= link_to post_path(post.id) do %>
-          <li class="your-nav-item"><%= attachment_image_tag post.images.last, :image, fallback: "No_image.png",size: '80x80', class:"post-image" %>
+          <li class="your-nav-item"><%= attachment_image_tag post.images.last, :image, fallback: "No_image.png",size:'80x80', class:"post-image", style:"object-fit: cover;" %>
           <% end %>
         </span>
   			<%=link_to post.title, post_path(post.id), class:"post-title" %>
@@ -63,7 +63,7 @@
           <% @user.favorite_posts.each do |fpost| %>
             <li class="your-nav-item">
               <span class="post-index"><%= link_to post_path(fpost.id) do %>
-            <%= attachment_image_tag fpost.images.last, :image, fallback: "No_image.png",size: '110x110', class:"post-image" %></span>
+            <%= attachment_image_tag fpost.images.last, :image, fallback: "No_image.png",size:'110x110', class:"post-image", style:"object-fit: cover;" %></span>
           <% end %>
         <%=link_to fpost.title, post_path(fpost.id), class:"post-title" %></li>
       <% end %>
