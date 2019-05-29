@@ -6,7 +6,7 @@
     <div class="post-detail">
         <div class="user-detail-box">
           <span><%= link_to user_path(@post.user_id) do %>
-            <%= attachment_image_tag @post.user, :image, :fill, 150, 150, fallback: "No_image.png",size: '150x150', class:"user-image", style:"text-decoration:none;" %>
+            <%= attachment_image_tag @post.user, :image, fallback: "No_image.png",size: '150x150', class:"user-image", style:"text-decoration:none;" %>
             <% end %></span>
             <span style="padding-left:20px; font-size:18px; top: 8px;"><%= link_to @post.user.nickname, user_path(@post.user_id) %></span>
             <%= render 'relationships/list', users: @user %>
