@@ -10,12 +10,10 @@
 		<% if @results.any? %>
 	 		<% @results.where.not(user_id: @delete_user).each do |result| %>
 	 		<tr>
-	 			<%= link_to post_path(result.id) do %>
-		 		<td>
+		 		<td><span><%= link_to post_path(result.id) do %>
 		            <%= attachment_image_tag result.images.last, :image, fallback: "No_image.png",size: '70x70', class:"post-image", style:"object-fit: cover;" %></td>
-		   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p></td>
+		   		<td><p><%= link_to result.title, post_path(result.id), class:"post-title" %></p><% end %></span></td>
 		   	</tr>
-		   	<% end %>
 		 	<% end %>
 		<% end %>
 	</table>
