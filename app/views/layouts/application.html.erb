@@ -32,41 +32,41 @@
                   <ul class="header-page">
                       <% if user_signed_in? && current_user.admin? %>
                           <li class="header-right">
-                            <%= link_to "About", root_path, class="fas fa-book-open" %>
+                            <%= link_to "About", root_path, class:"header-link fas fa-book-open" %>
                           </li>
                           <li class="header-right">
-                            <%= link_to "New Post", new_post_path, class: "header-link fas fa-walking" %>
+                            <%= link_to "New Post", new_post_path, class:"header-link fas fa-walking" %>
                           </li>
                           <li class="header-right">
                             <%= link_to "Admin Mypage", user_path(current_user.id), class: "header-link fas fa-home" %>
                           </li>
                           <li class="header-right">
-                            <%= link_to "Users", management_path, class: "header-link fas fa-users" %>
+                            <%= link_to "Users", management_path, class:"header-link fas fa-users" %>
                           </li>
                           <li class="header-right">
-                              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "header-link fas fa-sign-out-alt" %>
+                              <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"header-link fas fa-sign-out-alt" %>
                           </li>
                       <% elsif user_signed_in? && !current_user.admin? %>
                           <li class="header-right">
-                            <%= link_to "About", root_path, class="fas fa-book-open" %>
+                            <%= link_to "About", root_path, class:"header-link fas fa-book-open" %>
                           </li>
                           <li class="header-right">
-                            <%= link_to "New Post", new_post_path, class: "header-link fas fa-walking" %>
+                            <%= link_to "New Post", new_post_path, class:"header-link fas fa-walking" %>
                           </li>
                           <li class="header-right">
                             <li class="header-right">
-                            <%= link_to "Mypage", user_path(current_user.id), class: "header-link fas fa-home" %>
+                            <%= link_to "Mypage", user_path(current_user.id), class:"header-link fas fa-home" %>
                             </li>
                           </li>
                           <li class="header-right">
-                              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "header-link fas fa-sign-out-alt" %>
+                              <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"header-link fas fa-sign-out-alt" %>
                           </li>
                       <% else %>
                           <li class="header-right">
-                              <%= link_to "Sign up", new_user_registration_path, class: "header-link fas fa-user-plus" %>
+                              <%= link_to "Sign up", new_user_registration_path, class:"header-link fas fa-user-plus" %>
                           </li>
                           <li class="header-right">
-                              <%= link_to "Login", new_user_session_path, class: "header-link fas fa-sign-in-alt" %>
+                              <%= link_to "Login", new_user_session_path, class:"header-link fas fa-sign-in-alt" %>
                           </li>
                       <% end %>
                   </ul>
