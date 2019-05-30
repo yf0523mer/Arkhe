@@ -77,5 +77,4 @@ group :production do
   gem 'pg'
 end
 gem 'fog-aws'
-#gem "aws-sdk-s3", require: false
 gem 'refile-s3'
