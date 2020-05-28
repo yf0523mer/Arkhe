@@ -36,7 +36,7 @@ gem "jquery-rails"
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 gem 'ransack'
 gem 'devise'
 gem 'geocoder'
